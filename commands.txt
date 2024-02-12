@@ -1,0 +1,2 @@
+randomtrips:
+python "C:\Program Files (x86)\Eclipse\Sumo\tools\randomTrips.py" -n "net.net.xml" --fringe-factor "max" --allow-fringe --vehicle-class "passenger" -e "3600" -o "trips.trips.xml" -r "routes.rou.xml"
