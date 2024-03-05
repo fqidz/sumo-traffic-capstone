@@ -8,7 +8,7 @@ sumoBinary = "/usr/share/sumo/bin/sumo-gui"
 sumoCmd = [sumoBinary, "-c", "main.sumocfg"]
 
 traci.start(sumoCmd)
-for i in range(5000):
+for i in range(3000):
     traci.simulationStep()
     print(traci.vehicle.getIDCount())
 
