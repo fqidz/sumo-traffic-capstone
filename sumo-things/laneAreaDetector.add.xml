@@ -1,16 +1,16 @@
 <additional>
-    <laneAreaDetector id="eastLAD1" lanes="281221761#1_0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="eastLAD2" lanes="281221761#1_1" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="eastLAD3" lanes="281221761#1_2" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="northLAD1" lanes="480155244#5_0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="northLAD2" lanes="480155244#5_1" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="northLAD3" lanes="480155244#5_2" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="westLAD1" lanes="480041825#9_0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="westLAD2" lanes="480041825#9_1" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="westLAD3" lanes="480041825#9_2" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="southLAD1" lanes="64661021#4_0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="southLAD2" lanes="64661021#4_1" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
-   <laneAreaDetector id="southLAD3" lanes="64661021#4_2" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+    <laneAreaDetector id="eastLAD1" lane="281221761#1_0" length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="eastLAD2"  lane="281221761#1_1" length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="eastLAD3"  lane="281221761#1_2" length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="northLAD1" lane="480155244#5_0" length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="northLAD2" lane="480155244#5_1" length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="northLAD3" lane="480155244#5_2" length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="westLAD1"  lane="480041825#9_0" length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="westLAD2"  lane="480041825#9_1" length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="westLAD3"  lane="480041825#9_2" length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="southLAD1" lane="64661021#4_0"  length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="southLAD2" lane="64661021#4_1"  length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
+   <laneAreaDetector id="southLAD3" lane="64661021#4_2"  length="10" pos="0" file="./output/laneAreaDetectorOut.xml" tl="30896504"/>
 </additional>
 
 <!--
