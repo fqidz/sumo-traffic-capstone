@@ -40,7 +40,7 @@ sumo_cmd = [SUMOGUI_PATH, "-c", SUMOCFG_PATH]
 
 def count_cars_in_lanearea(lanearea_ids: tuple) -> list:
     """returns the amount of cars in each lanearea detector\n
-       format: [east1, east2, east3, north1, north2, north3, west1, west2, west3, south1, south2, south3]"""
+       format: [east1-3, north1-3, south1-3, west1-3]"""
     lanearea_count = []
     for i in lanearea_ids:
         lanearea_count.append(traci.lanearea.getLastStepVehicleNumber(i))
@@ -51,9 +51,9 @@ def count_cars_in_lanearea(lanearea_ids: tuple) -> list:
 
 traci.start(sumo_cmd)
 
-print(traci.lanearea.getIDList())
 for i in range(5000):
     lanearea_car_count = count_cars_in_lanearea(traci.lanearea.getIDList())
+    print(traci.lanearea.getIDList())
     print(lanearea_car_count)
 
     traci.simulationStep()
