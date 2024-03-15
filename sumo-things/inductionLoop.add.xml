@@ -1,16 +1,16 @@
 <additional>
-  <inductionLoop id="eastLoop1" lane="281221761#1_0" pos="15" file="inductionLoopOut.xml"/>
-  <inductionLoop id="eastLoop2" lane="281221761#1_1" pos="15" file="inductionLoopOut.xml"/>
-  <inductionLoop id="eastLoop3" lane="281221761#1_2" pos="15" file="inductionLoopOut.xml"/>
-  <inductionLoop id="northLoop1" lane="480155244#5_0" pos="34.5" file="inductionLoopOut.xml"/>
-  <inductionLoop id="northLoop2" lane="480155244#5_1" pos="34.5" file="inductionLoopOut.xml"/>
-  <inductionLoop id="northLoop3" lane="480155244#5_2" pos="34.5" file="inductionLoopOut.xml"/>
-  <inductionLoop id="westLoop1" lane="480041825#9_0" pos="101" file="inductionLoopOut.xml"/>
-  <inductionLoop id="westLoop2" lane="480041825#9_1" pos="101" file="inductionLoopOut.xml"/>
-  <inductionLoop id="westLoop3" lane="480041825#9_2" pos="101" file="inductionLoopOut.xml"/>
-  <inductionLoop id="southLoop1" lane="64661021#4_0" pos="24" file="inductionLoopOut.xml"/>
-  <inductionLoop id="southLoop2" lane="64661021#4_1" pos="24" file="inductionLoopOut.xml"/>
-  <inductionLoop id="southLoop3" lane="64661021#4_2" pos="24" file="inductionLoopOut.xml"/>
+    <inductionLoop id="eastLoop1" lane="281221761#1_0" pos="15" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="eastLoop2" lane="281221761#1_1" pos="15" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="eastLoop3" lane="281221761#1_2" pos="15" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="northLoop1" lane="480155244#5_0" pos="34.5" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="northLoop2" lane="480155244#5_1" pos="34.5" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="northLoop3" lane="480155244#5_2" pos="34.5" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="westLoop1" lane="480041825#9_0" pos="101" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="westLoop2" lane="480041825#9_1" pos="101" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="westLoop3" lane="480041825#9_2" pos="101" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="southLoop1" lane="64661021#4_0" pos="24" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="southLoop2" lane="64661021#4_1" pos="24" file="./output/inductionLoopOut.xml"/>
+  <inductionLoop id="southLoop3" lane="64661021#4_2" pos="24" file="./output/inductionLoopOut.xml"/>
 </additional>
 
 <!--

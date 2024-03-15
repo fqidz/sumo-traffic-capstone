@@ -1,1 +1,0 @@
-python3 "$SUMO_HOME/tools/randomTrips.py" -n "net.net.xml" --fringe-factor "max" --allow-fringe -e "3600" -r "routes.rou.xml" --trip-attributes="type=\"myType\"" --additional-file "./sumo-things/vehicle-class.add.xml"

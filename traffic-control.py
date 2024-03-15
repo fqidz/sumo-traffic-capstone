@@ -2,7 +2,6 @@
 # TODO: prompt if user wants to rerun randomTrips.py command argument stuff
 # TODO: also generate lane area detectors
 # TODO: move the todo functionalities to separate scripts 
-import subprocess
 import traci
 
 NET_PATH = "./sumo-things/net.net.xml"
@@ -16,10 +15,6 @@ VEHICLE_CLASS_PATH = "./sumo-things/vehicleClass.add.xml"
 
 
 # ask user to use randomTrips or not
-generate_random = input("Generate random? (y/n)")
-if generate_random.lower() == 'y':
-    print("running randomTrips.py")
-    subprocess.run(["python3", "./randomTrips.py", "-v", "-n", NET_PATH, "--fringe-factor", 'max', "--allow-fringe", "-o", "./sumo-things/trips.trips.xml", "-r", "./sumo-things/routes.rou.xml", '--trip-attributes=type=\"myType\"', "--additional-file", VEHICLE_CLASS_PATH])
 
 # start traci stuff
 SUMOGUI_PATH = "/usr/share/sumo/bin/sumo-gui"
