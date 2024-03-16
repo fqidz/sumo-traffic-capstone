@@ -17,7 +17,8 @@ VEHICLE_CLASS_PATH = "./sumo-things/vehicleClass.add.xml"
 # ask user to use randomTrips or not
 
 # start traci stuff
-SUMOGUI_PATH = "/usr/share/sumo/bin/sumo-gui"
+# SUMOGUI_PATH = "/usr/share/sumo/bin/sumo-gui"
+SUMOGUI_PATH = "C:/Program Files (x86)/Eclipse/Sumo/bin/sumo-gui.exe"
 SUMOCFG_PATH = "./sumo-things/main.sumocfg"
 sumo_cmd = [SUMOGUI_PATH, "-c", SUMOCFG_PATH]
 
