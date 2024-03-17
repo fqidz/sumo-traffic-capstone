@@ -17,8 +17,7 @@ VEHICLE_CLASS_PATH = "./sumo-things/vehicleClass.add.xml"
 # ask user to use randomTrips or not
 
 # start traci stuff
-# SUMOGUI_PATH = "/usr/share/sumo/bin/sumo-gui"
-SUMOGUI_PATH = "C:/Program Files (x86)/Eclipse/Sumo/bin/sumo-gui.exe"
+SUMOGUI_PATH = "/usr/share/sumo/bin/sumo-gui"
 SUMOCFG_PATH = "./sumo-things/main.sumocfg"
 sumo_cmd = [SUMOGUI_PATH, "-c", SUMOCFG_PATH]
 
@@ -39,22 +38,26 @@ sumo_cmd = [SUMOGUI_PATH, "-c", SUMOCFG_PATH]
 #         self.south2 = []
 #         self.south3 = []
 
-def count_cars_in_lanearea(lanearea_ids: tuple) -> list:
-    """returns the amount of cars in each lanearea detector\n
-       format: [east1-3, north1-3, south1-3, west1-3]"""
-    lanearea_count = []
+def count_cars_in_lanearea(lanearea_ids: tuple) -> dict:
+    """returns the amount of cars in each lanearea detector"""
+    # get the count of cars for each lane area detector
+    lanearea_count = {}
     for i in lanearea_ids:
-        lanearea_count.append(traci.lanearea.getLastStepVehicleNumber(i))
+        lanearea_count[i] = traci.lanearea.getLastStepVehicleNumber(i)
 
+    # sum the lanearea detector car counts into each of the directions
+    lanearea_count_sum = {}
+    for dir in ["east", "north", "south", "west"]:
+        direction_values = {key: value for key, value in lanearea_count.items() if key.startswith(dir)}
+        lanearea_count_sum[dir] = sum(direction_values.values())
 
-    return lanearea_count
+    return lanearea_count_sum
 
 
 traci.start(sumo_cmd)
 
 for i in range(5000):
     lanearea_car_count = count_cars_in_lanearea(traci.lanearea.getIDList())
-    print(traci.lanearea.getIDList())
     print(lanearea_car_count)
 
     traci.simulationStep()

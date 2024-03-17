@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2024-03-15 20:31:26 by Eclipse SUMO netedit Version v1_19_0+1201-15e6959dda4
+<!-- generated on 2024-03-17 11:26:53 by Eclipse SUMO netedit Version v1_19_0+1305-3dcf69d3212
 -->
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
     <!-- VTypes -->
-    <vType id="DEFAULT_VEHTYPE"/>
-    <vTypeDistribution id="td_0" vTypes="DEFAULT_CONTAINERTYPE DEFAULT_VEHTYPE" probabilities="0.10 0.90"/>
+    <vType id="myType" vClass="passenger" carFollowModel="EIDM"/>
     <!-- Routes -->
     <route id="r_0" edges="480039692#10 480041825#0 480041825#1 480041825#2 480041825#3 480041825#4 480041825#5 480041825#6 480041825#7 480041825#9 281221762#0 281221762#1"/>
     <route id="r_1" edges="480039692#10 480041825#0 480041825#1 480041825#2 480041825#3 480041825#4 480041825#5 480041825#6 480041825#7 480041825#9 4811637#0 4811637#1 4811637#2"/>
@@ -40,5 +39,5 @@
     <flow id="f_6" begin="0.00" route="r_0" end="3600.00" vehsPerHour="600"/>
     <flow id="f_7" begin="0.00" route="r_2" end="3600.00" vehsPerHour="600"/>
     <flow id="f_8" begin="0.00" route="r_10" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_9" begin="0.00" route="r_8" end="3600.00" vehsPerHour="1800"/>
+    <flow id="f_9" begin="0.00" route="r_8" end="3600.00" vehsPerHour="1200"/>
 </routes>
