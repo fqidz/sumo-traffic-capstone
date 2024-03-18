@@ -4,21 +4,9 @@
 import traci
 import random
 
-NET_PATH = "./sumo-things/net.net.xml"
-VEHICLE_CLASS_PATH = "./sumo-things/vehicleClass.add.xml"
-# STAT_PATH = '"~/Documents/sumo-traffic-capstone/activity.stat.xml"'
-
-# ask user to use activityGen or not
-# generate_activity = input("Generate activity? (y/n)")
-# if generate_activity.lower() == 'y':
-#     subprocess.run(["python3", '"$SUMO_HOME/tools/activityGen.py"', "--net-file", NET_PATH, "--stat-file", STAT_PATH, "--output-file", '"./trips.rou.xml"', "--random"])
-
-
-# ask user to use randomTrips or not
-
-# start traci stuff
 SUMOGUI_PATH = "/usr/share/sumo/bin/sumo-gui"
 SUMOCFG_PATH = "./sumo-things/main.sumocfg"
+
 sumo_cmd = [SUMOGUI_PATH, "-c", SUMOCFG_PATH]
 
 
@@ -42,7 +30,14 @@ def count_cars_in_lanearea(lanearea_ids: tuple) -> dict:
 def switchPhase(traffic_id: str, phase: int):
     """switch traffic light phase"""
     traci.trafficlight.setPhase(traffic_id, phase)
-    traci.trafficlight.setPhaseDuration(traffic_id, 999999)
+    traci.trafficlight.setPhaseDuration(traffic_id, 100)
+
+# [car count east, car count north, car count south, car count west
+#  car avg speed east, car avg speed north, car avg speed south, car avg speed west
+#
+#  traffic light phase*]
+#
+# *format of: [rrGGyyrr] would be [0, 0, 1, 1, 0.5, 0.5, 0, 0]
 
 
 traci.start(sumo_cmd)
