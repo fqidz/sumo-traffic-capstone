@@ -24,20 +24,20 @@
     <route id="r_8" edges="64661021#1 64661021#2 64661021#3 64661021#4 281221762#0 281221762#1" color="blue"/>
     <route id="r_9" edges="64661021#1 64661021#2 64661021#3 4811639 4811637#1 4811637#2" color="blue"/>
     <!-- Vehicles, persons and containers (sorted by depart) -->
-    <flow id="f_0" begin="0.00" route="r_12" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_1" begin="0.00" route="r_13" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_10" begin="0.00" route="r_15" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_11" begin="0.00" route="r_9" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_12" begin="0.00" route="r_6" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_13" begin="0.00" route="r_3" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_14" begin="0.00" route="r_7" end="3600.00" vehsPerHour="1800"/>
-    <flow id="f_15" begin="0.00" route="r_5" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_2" begin="0.00" route="r_14" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_3" begin="0.00" route="r_11" end="3600.00" vehsPerHour="1800"/>
-    <flow id="f_4" begin="0.00" route="r_1" end="3600.00" vehsPerHour="1800"/>
-    <flow id="f_5" begin="0.00" route="r_4" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_6" begin="0.00" route="r_0" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_7" begin="0.00" route="r_2" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_8" begin="0.00" route="r_10" end="3600.00" vehsPerHour="600"/>
-    <flow id="f_9" begin="0.00" route="r_8" end="3600.00" vehsPerHour="1200"/>
+    <flow id="f_0"  begin="0.00" route="r_12" end="3600.00" vehsPerHour="150"/>
+    <flow id="f_1"  begin="0.00" route="r_13" end="3600.00" vehsPerHour="150"/>
+    <flow id="f_10" begin="0.00" route="r_15" end="3600.00" vehsPerHour="150"/>
+    <flow id="f_11" begin="0.00" route="r_9"  end="3600.00" vehsPerHour="150"/>
+    <flow id="f_12" begin="0.00" route="r_6"  end="3600.00" vehsPerHour="150"/>
+    <flow id="f_13" begin="0.00" route="r_3"  end="3600.00" vehsPerHour="150"/>
+    <flow id="f_14" begin="0.00" route="r_7"  end="3600.00" vehsPerHour="450"/>
+    <flow id="f_15" begin="0.00" route="r_5"  end="3600.00" vehsPerHour="150"/>
+    <flow id="f_2"  begin="0.00" route="r_14" end="3600.00" vehsPerHour="150"/>
+    <flow id="f_3"  begin="0.00" route="r_11" end="3600.00" vehsPerHour="450"/>
+    <flow id="f_4"  begin="0.00" route="r_1"  end="3600.00" vehsPerHour="450"/>
+    <flow id="f_5"  begin="0.00" route="r_4"  end="3600.00" vehsPerHour="150"/>
+    <flow id="f_6"  begin="0.00" route="r_0"  end="3600.00" vehsPerHour="150"/>
+    <flow id="f_7"  begin="0.00" route="r_2"  end="3600.00" vehsPerHour="150"/>
+    <flow id="f_8"  begin="0.00" route="r_10" end="3600.00" vehsPerHour="150"/>
+    <flow id="f_9"  begin="0.00" route="r_8"  end="3600.00" vehsPerHour="300"/>
 </routes>

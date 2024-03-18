@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2024-03-17 11:32:45 by Eclipse SUMO netedit Version v1_19_0+1305-3dcf69d3212
+<!-- generated on 2024-03-17 14:37:05 by Eclipse SUMO netedit Version v1_19_0+1305-3dcf69d3212
 -->
 
 <additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
     <!-- Detectors -->
-    <inductionLoop id="eastLoop1" lane="281221761#1_0" pos="15.00" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="eastLoop2" lane="281221761#1_1" pos="15.00" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="eastLoop3" lane="281221761#1_2" pos="15.00" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="northLoop1" lane="480155244#5_0" pos="34.50" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="northLoop2" lane="480155244#5_1" pos="34.50" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="northLoop3" lane="480155244#5_2" pos="34.50" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="southLoop1" lane="64661021#4_0" pos="24.00" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="southLoop2" lane="64661021#4_1" pos="24.00" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="southLoop3" lane="64661021#4_2" pos="24.00" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="westLoop1" lane="480041825#9_0" pos="101.00" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="westLoop2" lane="480041825#9_1" pos="101.00" file="./output/inductionLoopOut.xml"/>
-    <inductionLoop id="westLoop3" lane="480041825#9_2" pos="101.00" file="./output/inductionLoopOut.xml"/>
     <laneAreaDetector id="eastLAD0_0" lane="281221761#1_0" pos="0.00" length="27.53" tl="30896504" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="eastLAD0_1" lane="281221761#1_1" pos="0.00" length="27.53" tl="30896504" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="eastLAD0_2" lane="281221761#1_2" pos="0.00" length="27.53" tl="30896504" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>

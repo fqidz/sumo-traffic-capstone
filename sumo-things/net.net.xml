@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2024-03-17 11:32:45 by Eclipse SUMO netedit Version v1_19_0+1305-3dcf69d3212
+<!-- generated on 2024-03-17 14:37:05 by Eclipse SUMO netedit Version v1_19_0+1305-3dcf69d3212
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/neteditConfiguration.xsd">
 
     <input>
@@ -451,15 +451,23 @@
         <lane id="64661021#4_2" index="2" disallow="tram rail_urban rail rail_electric rail_fast ship" speed="22.22" length="29.80" shape="2007.41,2120.10 1999.06,2148.90"/>
     </edge>
 
-    <tlLogic id="30896504" type="actuated" programID="0" offset="0">
-        <phase duration="30" state="rrrrrrrrrrrrGGGGGGrrrrrr" minDur="10" maxDur="50"/>
+    <tlLogic id="30896504" type="static" programID="0" offset="0">
+        <phase duration="30" state="rrrrrrrrrrrrGGGGGGrrrrrr"/>
         <phase duration="5"  state="rrrrrrrrrrrryyyyyyrrrrrr"/>
-        <phase duration="30" state="rrrrrrGGGGGGrrrrrrrrrrrr" minDur="10" maxDur="50"/>
-        <phase duration="5"  state="rrrrrryyyyyyrrrrrrrrrrrr"/>
-        <phase duration="30" state="rrrrrrrrrrrrrrrrrrGGGGGG" minDur="10" maxDur="50"/>
-        <phase duration="5"  state="rrrrrrrrrrrrrrrrrryyyyyy"/>
-        <phase duration="30" state="GGGGGGrrrrrrrrrrrrrrrrrr" minDur="10" maxDur="50"/>
+        <phase duration="30" state="GGrrrrrrrrrrGGrrrrrrrrrr"/>
+        <phase duration="5"  state="yyrrrrrrrrrryyrrrrrrrrrr"/>
+        <phase duration="30" state="rrGGGGrrrrrrrrGGGGrrrrrr"/>
+        <phase duration="5"  state="rryyyyrrrrrrrryyyyrrrrrr"/>
+        <phase duration="30" state="GGGGGGrrrrrrrrrrrrrrrrrr"/>
         <phase duration="5"  state="yyyyyyrrrrrrrrrrrrrrrrrr"/>
+        <phase duration="30" state="rrrrrrGGGGGGrrrrrrrrrrrr"/>
+        <phase duration="5"  state="rrrrrryyyyyyrrrrrrrrrrrr"/>
+        <phase duration="30" state="rrrrrrGGrrrrrrrrrrGGrrrr"/>
+        <phase duration="5"  state="rrrrrryyrrrrrrrrrryyrrrr"/>
+        <phase duration="30" state="rrrrrrrrGGGGrrrrrrrrGGGG"/>
+        <phase duration="5"  state="rrrrrrrryyyyrrrrrrrryyyy"/>
+        <phase duration="30" state="rrrrrrrrrrrrrrrrrrGGGGGG"/>
+        <phase duration="5"  state="rrrrrrrrrrrrrrrrrryyyyyy"/>
     </tlLogic>
 
     <junction id="1157401209" type="dead_end" x="2395.43" y="1579.26" incLanes="" intLanes="" shape="2394.17,1576.32 2396.69,1582.20"/>
