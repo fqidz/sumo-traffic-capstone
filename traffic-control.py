@@ -27,20 +27,18 @@ class TraciSim:
     def countCarsInLanearea(self, lanearea_ids: tuple) -> dict:
         """returns the amount of cars in each lanearea detector"""
         # get the count of cars for each lane area detector
-        lanearea_count = {}
         lanearea_jam = {}
         for i in lanearea_ids:
-            lanearea_count[i] = traci.lanearea.getLastStepVehicleNumber(i)
             lanearea_jam[i] = traci.lanearea.getIntervalMaxJamLengthInMeters(i)
 
         # sum the lanearea detector car counts into each of the directions
-        lanearea_count_sum = {}
-        for dir in ["east", "north", "south", "west"]:
+        direction_values = {}
+        for dir in ["eastLAD0", "northLAD0", "southLAD0", "westLAD0"]:
             direction_values = {key: value for key,
-                                value in lanearea_count.items() if key.startswith(dir)}
-            lanearea_count_sum[dir] = sum(direction_values.values())
+                                value in lanearea_jam.items() if key.startswith(dir)}
+            direction_values[dir] = sum(direction_values.values())
 
-        return lanearea_count_sum
+        return direction_values
 
     def setState(self, traffic_id: str, state_input: list[float]) -> None:
         _state_output = []
@@ -73,6 +71,7 @@ class TraciSim:
         print(f'{self.countCarsInLanearea(self.lanearea_ids)}')
         self.setState(self.traffic_id, self.traffic_state)
         print(f'state: {traci.trafficlight.getRedYellowGreenState("0")}')
+        print(self.lanearea_ids)
         traci.simulationStep()
 
 
