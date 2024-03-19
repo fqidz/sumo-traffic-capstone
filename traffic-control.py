@@ -2,6 +2,7 @@
 # TODO: use waiting time for reward
 # TODO: check if cars are stuck in the junction
 import traci
+import traci.constants as tc
 
 
 # [car count east, car count north, car count south, car count west
@@ -27,8 +28,10 @@ class TraciSim:
         """returns the amount of cars in each lanearea detector"""
         # get the count of cars for each lane area detector
         lanearea_count = {}
+        lanearea_jam = {}
         for i in lanearea_ids:
             lanearea_count[i] = traci.lanearea.getLastStepVehicleNumber(i)
+            lanearea_jam[i] = traci.lanearea.getIntervalMaxJamLengthInMeters(i)
 
         # sum the lanearea detector car counts into each of the directions
         lanearea_count_sum = {}
@@ -64,12 +67,12 @@ class TraciSim:
                     raise Exception('State should be 0.0, 0.5, or 1.0')
 
         _state_string = ''.join(_state_output)
-        print(_state_string)
         traci.trafficlight.setRedYellowGreenState(traffic_id, _state_string)
 
     def step(self):
-        self.countCarsInLanearea(self.lanearea_ids)
+        print(f'{self.countCarsInLanearea(self.lanearea_ids)}')
         self.setState(self.traffic_id, self.traffic_state)
+        print(f'state: {traci.trafficlight.getRedYellowGreenState("0")}')
         traci.simulationStep()
 
 
