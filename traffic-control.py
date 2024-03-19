@@ -1,8 +1,8 @@
-# TODO: use queue length instead of count of cars
 # TODO: use waiting time for reward
 # TODO: check if cars are stuck in the junction
 import traci
-import traci.constants as tc
+import random
+import numpy as np
 
 
 # [car count east, car count north, car count south, car count west
@@ -21,24 +21,69 @@ sumo_cmd = [SUMOGUI_PATH, "-c", SUMOCFG_PATH]
 class TraciSim:
     def __init__(self) -> None:
         self.traffic_id = "0"
-        self.traffic_state = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self.lanearea_ids = traci.lanearea.getIDList()
 
-    def countCarsInLanearea(self, lanearea_ids: tuple) -> dict:
-        """returns the amount of cars in each lanearea detector"""
-        # get the count of cars for each lane area detector
+        self.traffic_state = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self.mean_speeds = []
+        self.jam_length = []
+
+    def getMeanSpeedInLanearea(self, lanearea_ids: tuple) -> None:
+        """returns [eastLAD0, eastLAD1, northLAD0, ... , westLAD2]"""
+        lanearea_mean_speed = {}
+        for i in lanearea_ids:
+            lanearea_mean_speed[i] = traci.lanearea.getLastStepMeanSpeed(
+                i)
+
+        # Split the keys by "_" and use the first part (direction) as the key in the summed_values dictionary
+        mean_speed_sum = {}
+        # count amount of lane segments to mean it later
+        lane_segment_count = {}
+        for key, value in lanearea_mean_speed.items():
+            direction = key.split("_")[0]
+            if direction not in mean_speed_sum:
+                lane_segment_count[direction] = 0
+                mean_speed_sum[direction] = 0
+            else:
+                lane_segment_count[direction] += 1
+                mean_speed_sum[direction] += value
+
+        # turn dict into list
+        mean_speed_list = list(mean_speed_sum.values())
+        dir_count_list = list(lane_segment_count.values())
+
+        # get mean speed among the separated lanearea detectors, then normalize to max car speed
+        mean_speeds = np.divide(mean_speed_list, dir_count_list)
+        mean_speeds_normalized = np.round(
+            np.divide(mean_speeds, 55.55), decimals=5)
+
+        self.mean_speeds = mean_speeds_normalized
+
+    def getJamLengthInLanearea(self, lanearea_ids: tuple) -> None:
+        """returns [eastLAD0, eastLAD1, northLAD0, ... , westLAD2]"""
+
         lanearea_jam = {}
         for i in lanearea_ids:
-            lanearea_jam[i] = traci.lanearea.getIntervalMaxJamLengthInMeters(i)
+            lanearea_jam[i] = traci.lanearea.getLastIntervalMaxJamLengthInMeters(
+                i)
 
-        # sum the lanearea detector car counts into each of the directions
-        direction_values = {}
-        for dir in ["eastLAD0", "northLAD0", "southLAD0", "westLAD0"]:
-            direction_values = {key: value for key,
-                                value in lanearea_jam.items() if key.startswith(dir)}
-            direction_values[dir] = sum(direction_values.values())
+        # Split the keys by "_" and use the first part (direction) as the key in the summed_values dictionary
+        jam_count_sum = {}
+        for key, value in lanearea_jam.items():
+            direction = key.split("_")[0]
+            if direction not in jam_count_sum:
+                jam_count_sum[direction] = 0
+            else:
+                jam_count_sum[direction] += value
 
-        return direction_values
+        max_jam_length = [230.56, 257.9656622406022, 306.3, 306.3, 306.3,
+                          320.74, 348.64720360752835, 238.69, 230.32428296642462, 238.69]
+        jam_length = list(jam_count_sum.values())
+
+        # normalize jam length
+        jam_length_normalized = np.round(
+            np.divide(jam_length, max_jam_length), decimals=5)
+
+        self.jam_length = jam_length_normalized
 
     def setState(self, traffic_id: str, state_input: list[float]) -> None:
         _state_output = []
@@ -68,10 +113,21 @@ class TraciSim:
         traci.trafficlight.setRedYellowGreenState(traffic_id, _state_string)
 
     def step(self):
-        print(f'{self.countCarsInLanearea(self.lanearea_ids)}')
+        self.getJamLengthInLanearea(self.lanearea_ids)
+        self.getMeanSpeedInLanearea(self.lanearea_ids)
+
+        print(self.jam_length)
+        print(self.mean_speeds)
+
+        rand_state = []
+        for i in range(8):
+            rand_state.append(random.choice([0.0, 0.5, 1.0]))
+        self.traffic_state = rand_state
         self.setState(self.traffic_id, self.traffic_state)
+
+        print(self.traffic_state)
         print(f'state: {traci.trafficlight.getRedYellowGreenState("0")}')
-        print(self.lanearea_ids)
+
         traci.simulationStep()
 
 

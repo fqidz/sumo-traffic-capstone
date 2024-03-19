@@ -5,11 +5,11 @@
 
 <additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
     <!-- Detectors -->
-    <laneAreaDetector id="eastLAD0_0" lane="281221761#1_2" pos="0.00" length="27.53" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
-    <laneAreaDetector id="eastLAD0_1" lane="484449878#6_1" pos="0.00" length="230.56" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
+    <laneAreaDetector id="eastLAD0_0" lane="281221761#1_0" pos="0.00" length="27.53" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
+    <laneAreaDetector id="eastLAD0_1" lane="484449878#6_0" pos="0.00" length="230.56" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="eastLAD1_0" lane="281221761#1_1" pos="0.00" length="27.53" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
-    <laneAreaDetector id="eastLAD1_1" lane="484449878#6_0" pos="0.00" length="230.56" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
-    <laneAreaDetector id="eastLAD2_0" lane="281221761#1_0" pos="0.00" length="27.53" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
+    <laneAreaDetector id="eastLAD1_1" lane="281221761#1_2" pos="0.00" length="27.53" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
+    <laneAreaDetector id="eastLAD1_2" lane="484449878#6_1" pos="0.00" length="230.56" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="northLAD0_0" lane="480155244#5_0" pos="0.00" length="43.72" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="northLAD0_1" lane="480155244#4_0" pos="0.00" length="58.49" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="northLAD0_2" lane="480155244#3_0" pos="0.00" length="42.38" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
@@ -26,7 +26,7 @@
     <laneAreaDetector id="southLAD0_1" lane="64661021#3_1" pos="0.00" length="320.74" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="southLAD1_0" lane="64661021#4_1" pos="0.00" length="29.80" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="southLAD1_1" lane="64661021#4_0" pos="0.00" length="29.80" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
-    <laneAreaDetector id="southLAD2_0" lane="64661021#3_0" pos="0.00" length="320.74" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
+    <laneAreaDetector id="southLAD1_2" lane="64661021#3_0" pos="0.00" length="320.74" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="westLAD0_0" lane="480041825#9_0" pos="0.00" length="106.71" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="westLAD0_1" lane="480041825#7_0" pos="0.00" length="238.69" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
     <laneAreaDetector id="westLAD1_0" lane="480041825#9_1" pos="0.00" length="106.71" tl="0" file="./output/laneAreaDetectorOut.xml" friendlyPos="1"/>
