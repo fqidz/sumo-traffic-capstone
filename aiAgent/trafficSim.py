@@ -5,19 +5,6 @@ import random
 import numpy as np
 
 
-# [car count east, car count north, car count south, car count west
-#  car avg speed east, car avg speed north, car avg speed south, car avg speed west
-#
-#  traffic light phase*]
-#
-# *format of: [rrGGyyrr] would be [0, 0, 1, 1, 0.5, 0.5, 0, 0]
-
-SUMOGUI_PATH = "/usr/share/sumo/bin/sumo-gui"
-SUMOCFG_PATH = "./sumo-things/main.sumocfg"
-
-sumo_cmd = [SUMOGUI_PATH, "-c", SUMOCFG_PATH]
-
-
 class TraciSim:
     def __init__(self) -> None:
         self.traffic_id = "0"
@@ -55,6 +42,8 @@ class TraciSim:
         mean_speeds = np.divide(mean_speed_list, dir_count_list)
         mean_speeds_normalized = np.round(
             np.divide(mean_speeds, 55.55), decimals=5)
+        # make negative numbers round up to 0
+        mean_speeds_normalized = mean_speeds_normalized.clip(min=0.0)
 
         self.mean_speeds = mean_speeds_normalized
 
@@ -131,11 +120,3 @@ class TraciSim:
         traci.simulationStep()
 
 
-traci.start(sumo_cmd)
-sim = TraciSim()
-
-for i in range(5000):
-
-    sim.step()
-
-traci.close()
