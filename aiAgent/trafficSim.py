@@ -11,7 +11,6 @@ class TraciSim:
         self.sumo_cmd = ["/usr/share/sumo/bin/sumo",
                          "-c", "./sumo-things/main.sumocfg"]
         traci.start(self.sumo_cmd)
-        self.reset()
 
         self.traffic_id = "0"
         self.lanearea_ids = traci.lanearea.getIDList()
@@ -125,6 +124,7 @@ class TraciSim:
         traci.trafficlight.setRedYellowGreenState(traffic_id, _state_string)
 
     def play_step(self, traffic_state):
+        # TODO: reward giving
         game_over = False
         reward = 0
 

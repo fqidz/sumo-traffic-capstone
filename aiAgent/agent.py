@@ -62,8 +62,9 @@ class Agent:
             # TODO: fix this
             state0 = torch.tensor(state, dtype=torch.float)
             prediction = self.model(state0)
-            move = torch.argmax(prediction).item()
-            final_move[move] = 1
+            rounded_prediction = np.divide(
+                np.round(np.multiply(np.array(prediction), 2)), 2)
+            final_move = rounded_prediction
 
         return final_move
 
@@ -83,7 +84,7 @@ def train():
         final_move = agent.get_action(state_old)
 
         # perform move and get new state
-        reward, done, score = game.play_step(final_move)
+        reward, done = game.play_step(final_move)
         state_new = agent.get_state(game)
 
         # train short memory
@@ -98,6 +99,8 @@ def train():
             game.reset()
             agent.n_games += 1
             agent.train_long_memory()
+
+            # TODO: do some shit
 
             if score > record:
                 record = score
