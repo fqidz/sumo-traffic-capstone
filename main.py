@@ -1,16 +1,11 @@
-import traci
 from aiAgent.trafficSim import TraciSim
+import random
 
-SUMOGUI_PATH = "/usr/share/sumo/bin/sumo-gui"
-SUMOCFG_PATH = "./sumo-things/main.sumocfg"
-
-sumo_cmd = [SUMOGUI_PATH, "-c", SUMOCFG_PATH]
-
-traci.start(sumo_cmd)
 sim = TraciSim()
 
-for i in range(5000):
+while True:
+    rand_state = []
+    for i in range(8):
+        rand_state.append(random.choice([0.0, 0.5, 1.0]))
 
-    sim.step()
-
-traci.close()
+    sim.play_step(rand_state)

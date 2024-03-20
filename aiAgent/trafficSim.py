@@ -3,16 +3,37 @@
 import traci
 import random
 import numpy as np
+import time
 
 
 class TraciSim:
-    def __init__(self) -> None:
+    def __init__(self, duration=100) -> None:
+        self.sumo_cmd = ["/usr/share/sumo/bin/sumo",
+                         "-c", "./sumo-things/main.sumocfg"]
+        traci.start(self.sumo_cmd)
+        self.reset()
+
         self.traffic_id = "0"
         self.lanearea_ids = traci.lanearea.getIDList()
+        self.duration = duration
 
         self.traffic_state = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-        self.mean_speeds = []
-        self.jam_length = []
+        self.mean_speeds = np.array(
+            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+        self.jam_length = np.array(
+            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+        self.frame_iteration = 0.0
+
+    def reset(self):
+        traci.close()
+        traci.start(self.sumo_cmd)
+
+        self.frame_iteration = 0.0
+        self.traffic_state = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self.mean_speeds = np.array(
+            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+        self.jam_length = np.array(
+            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 
     def getMeanSpeedInLanearea(self, lanearea_ids: tuple) -> None:
         """returns [eastLAD0, eastLAD1, northLAD0, ... , westLAD2]"""
@@ -75,6 +96,7 @@ class TraciSim:
         self.jam_length = jam_length_normalized
 
     def setState(self, traffic_id: str, state_input: list[float]) -> None:
+        """converts list of floats to a string of state and sets the traffic state to that"""
         _state_output = []
         # states are grouped together, so that each state represent a phase that matches with the lane
         # so that eg. left turns and u-turns traffic light signals are grouped together
@@ -99,24 +121,30 @@ class TraciSim:
                     raise Exception('State should be 0.0, 0.5, or 1.0')
 
         _state_string = ''.join(_state_output)
+        # set state
         traci.trafficlight.setRedYellowGreenState(traffic_id, _state_string)
 
-    def step(self):
+    def play_step(self, traffic_state):
+        game_over = False
+        reward = 0
+
+        if self.frame_iteration >= self.duration:
+            game_over = True
+            return reward, game_over
+
         self.getJamLengthInLanearea(self.lanearea_ids)
         self.getMeanSpeedInLanearea(self.lanearea_ids)
 
-        print(self.jam_length)
-        print(self.mean_speeds)
-
-        rand_state = []
-        for i in range(8):
-            rand_state.append(random.choice([0.0, 0.5, 1.0]))
-        self.traffic_state = rand_state
+        # traffic state is the input
+        self.traffic_state = traffic_state
         self.setState(self.traffic_id, self.traffic_state)
 
+        print(self.jam_length)
+        print(self.mean_speeds)
         print(self.traffic_state)
-        print(f'state: {traci.trafficlight.getRedYellowGreenState("0")}')
+        print(self.frame_iteration)
 
         traci.simulationStep()
+        self.frame_iteration += 1
 
-
+        return reward, game_over
