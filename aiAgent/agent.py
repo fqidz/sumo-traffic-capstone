@@ -73,8 +73,6 @@ class Agent:
                 np.round(np.multiply(move_normalized, 2)), 2)
             final_move = move_rounded.tolist()
 
-            print(f'prediction: {prediction}')
-            print(f'normalized: {move_normalized}')
         return final_move
 
 
@@ -104,12 +102,14 @@ def train():
         agent.remember(state_old, final_move, reward, state_new, done)
 
         # output debug info
-        debug_print = [f'Frame Iteration: {game.frame_iteration}',
-                       f'Traffic State: {game.traffic_state}',
-                       f'Jam Length: {game.jam_length}',
-                       f'Mean Speeds: {game.mean_speeds}',
-                       f'Reward: {game.reward}',
-                       f'Score (No. of cars exited): {game.score}']
+        # debug_print = [f'Frame Iteration: {game.frame_iteration}',
+        #                f'Traffic State: {game.traffic_state}',
+        #                f'Jam Length: {game.jam_length}',
+        #                f'Mean Speeds: {game.mean_speeds}',
+        #                f'Reward: {game.reward}',
+        #                f'Score (No. of cars exited): {game.score}']
+        debug_print = f'Frame Iteration: {game.frame_iteration}\nTraffic State: {game.traffic_state}\nJam Length: {
+            game.jam_length}\nMean Speeds: {game.mean_speeds}\nReward: {game.reward}\nScore (No. of cars exited): {game.score}\n'
 
         print(debug_print)
 

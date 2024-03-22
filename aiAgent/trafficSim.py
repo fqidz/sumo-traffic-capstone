@@ -144,12 +144,12 @@ class TraciSim:
         # vehicles collide
         # vehicles emergency stop
         for i in range(traci.simulation.getCollidingVehiclesNumber()):
-            self.reward -= 1
+            self.reward -= 0.1
 
         for i in range(traci.simulation.getEmergencyStoppingVehiclesNumber()):
-            self.reward -= 1
+            self.reward -= 0.1
 
-            self.reward += np.average(self.mean_speeds) * 0.1
+            self.reward += np.average(self.mean_speeds) * 0.5
 
         # TODO: make this score be something that we want to aim for, like queue length or waiting times
         self.score += traci.simulation.getArrivedNumber()

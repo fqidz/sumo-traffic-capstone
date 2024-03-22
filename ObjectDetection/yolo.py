@@ -10,7 +10,7 @@ from ultralytics import YOLO
 from ultralytics.solutions import distance_calculation
 import cv2
 
-model = YOLO("yolov8n.pt")
+model = YOLO("yolov8m.pt")
 names = model.model.names
 
 cap = cv2.VideoCapture(2)
