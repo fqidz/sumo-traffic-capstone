@@ -4,12 +4,17 @@ import traci
 import random
 import numpy as np
 import time
+import os
 
 
 class TraciSim:
     def __init__(self, duration=5000) -> None:
-        self.sumo_cmd = ["/usr/share/sumo/bin/sumo",
-                         "-c", "./sumo-things/main.sumocfg"]
+        if os.name == 'nt':
+            sumo_path = "C:/Program Files (x86)/Eclipse/Sumo/bin/sumo.exe"
+        else:
+            sumo_path = "/usr/share/sumo/bin/sumo"
+
+        self.sumo_cmd = [sumo_path, "-c", "../sumo-things/main.sumocfg"]
         traci.start(self.sumo_cmd)
 
         self.traffic_id = "0"
@@ -18,6 +23,7 @@ class TraciSim:
 
         self.score = 0
         self.frame_iteration = 0
+        self.reward = 0
 
         self.traffic_state = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self.mean_speeds = np.array(
