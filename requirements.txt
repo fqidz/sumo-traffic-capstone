@@ -1,1 +1,7 @@
 traci
+torch
+torchvision
+torchaudio
+numpy
+matplotlib
+PyQt5

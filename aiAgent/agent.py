@@ -12,6 +12,7 @@ MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
 LR = 0.001
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class Agent:
 
@@ -64,10 +65,10 @@ class Agent:
                           random.choice([0.0, 0.5, 1.0]),
                           random.choice([0.0, 0.5, 1.0])]
         else:
-            state0 = torch.tensor(state, dtype=torch.float)
+            state0 = torch.tensor(state, dtype=torch.float, device=device)
             prediction = self.model(state0)
             # normalize range from -1 to 1 -> 0 to 1
-            move_normalized = np.divide(np.add(torch.tensor(prediction), 1), 2)
+            move_normalized = np.divide(np.add(torch.tensor(prediction.cpu()), 1), 2)
             # round prediction to 0.0, 0.5, or 1.0
             move_rounded = np.divide(
                 np.round(np.multiply(move_normalized, 2)), 2)

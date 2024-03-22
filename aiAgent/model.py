@@ -4,13 +4,14 @@ import torch.optim as optim
 import torch.nn.functional as F
 import os
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class Linear_QNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super().__init__()
-        self.linear1 = nn.Linear(input_size, hidden_size)
-        self.linear2 = nn.Linear(hidden_size, hidden_size)
-        self.linear3 = nn.Linear(hidden_size, output_size)
+        self.linear1 = nn.Linear(input_size, hidden_size, device=device)
+        self.linear2 = nn.Linear(hidden_size, hidden_size, device=device)
+        self.linear3 = nn.Linear(hidden_size, output_size, device=device)
 
     def forward(self, x):
         x = F.relu(self.linear1(x))
@@ -35,10 +36,10 @@ class QTrainer:
         self.criterion = nn.MSELoss()
 
     def train_step(self, state, action, reward, next_state, done):
-        state = torch.tensor(state, dtype=torch.float)
-        next_state = torch.tensor(next_state, dtype=torch.float)
-        action = torch.tensor(action, dtype=torch.long)
-        reward = torch.tensor(reward, dtype=torch.float)
+        state = torch.tensor(state, dtype=torch.float, device=device)
+        next_state = torch.tensor(next_state, dtype=torch.float, device=device)
+        action = torch.tensor(action, dtype=torch.long, device=device)
+        reward = torch.tensor(reward, dtype=torch.float, device=device)
         # (n, x)
 
         if len(state.shape) == 1:
