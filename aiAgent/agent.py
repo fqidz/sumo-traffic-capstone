@@ -10,9 +10,10 @@ from helper import plot
 
 MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
-LR = 0.001
+LR = 0.0005
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 class Agent:
 
@@ -53,9 +54,11 @@ class Agent:
 
     def get_action(self, state):
         # random moves: tradeoff exploration / exploitation
-        self.epsilon = 80 - self.n_games
+        self.epsilon = 10 - self.n_games
         final_move = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-        if random.randint(0, 200) < self.epsilon:
+        move_clipped = None
+        prediction = None
+        if random.randint(0, 50) < self.epsilon:
             final_move = [random.choice([0.0, 0.5, 1.0]),
                           random.choice([0.0, 0.5, 1.0]),
                           random.choice([0.0, 0.5, 1.0]),
@@ -68,13 +71,15 @@ class Agent:
             state0 = torch.tensor(state, dtype=torch.float, device=device)
             prediction = self.model(state0)
             # normalize range from -1 to 1 -> 0 to 1
-            move_normalized = np.divide(np.add(torch.tensor(prediction.cpu()), 1), 2)
+            # move_normalized = np.divide(
+            #    np.add(torch.tensor(prediction.cpu()), 0.5), 2)
+            move_clipped = np.clip(torch.tensor(prediction.cpu()), 0, 1)
             # round prediction to 0.0, 0.5, or 1.0
             move_rounded = np.divide(
-                np.round(np.multiply(move_normalized, 2)), 2)
+                np.round(np.multiply(move_clipped, 2)), 2)
             final_move = move_rounded.tolist()
 
-        return final_move
+        return final_move, move_clipped, prediction
 
 
 def train():
@@ -89,7 +94,7 @@ def train():
         state_old = agent.get_state(game)
 
         # get move
-        final_move = agent.get_action(state_old)
+        final_move, move_normalized, prediction = agent.get_action(state_old)
 
         # perform move and get new state
         reward, done, score = game.play_step(final_move)
@@ -109,18 +114,20 @@ def train():
         #                f'Mean Speeds: {game.mean_speeds}',
         #                f'Reward: {game.reward}',
         #                f'Score (No. of cars exited): {game.score}']
-        debug_print = f'Frame Iteration: {game.frame_iteration}\nTraffic State: {game.traffic_state}\nJam Length: {
-            game.jam_length}\nMean Speeds: {game.mean_speeds}\nReward: {game.reward}\nScore (No. of cars exited): {game.score}\n'
+        debug_print = f'Frame Iteration: {game.frame_iteration}\nMove Normalized: {move_normalized}\nPrediction: {prediction}\nTraffic State: {game.traffic_state}\nJam Length: {
+            game.jam_length}\nMean Speeds: {game.mean_speeds}\nSum of Vehicle Waiting Times: {game.vehicle_waiting_time}\nReward: {game.reward}\nScore (No. of cars exited): {game.score}\n'
 
         print(debug_print)
+
+        if agent.n_games > 30:
+            game.sumo_cmd = ["/usr/share/sumo/bin/sumo-gui",
+                             "-c",  "./sumo-things/main.sumocfg"]
 
         if done:
             # train long memory, plot result
             game.reset()
             agent.n_games += 1
             agent.train_long_memory()
-
-            # TODO: do some shit
 
             if score > record:
                 record = score

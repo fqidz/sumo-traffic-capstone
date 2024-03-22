@@ -1,30 +1,30 @@
-# TODO: use waiting time for reward
 # TODO: check if cars are stuck in the junction
 import traci
-import random
 import numpy as np
-import time
 import os
 
 
 class TraciSim:
-    def __init__(self, duration=1000) -> None:
+    def __init__(self, duration=5000) -> None:
         if os.name == 'nt':
             sumo_path = "C:/Program Files (x86)/Eclipse/Sumo/bin/sumo.exe"
+            sumo_gui_path = "C:/Program Files (x86)/Eclipse/Sumo/bin/sumo-gui.exe"
             cfg_path = "../sumo-things/main.sumocfg"
         else:
-            sumo_path = "/usr/share/sumo/bin/sumo-gui"
+            sumo_path = "/usr/share/sumo/bin/sumo"
+            # sumo_gui_path = "/usr/share/sumo/bin/sumo-gui"
             cfg_path = "./sumo-things/main.sumocfg"
 
-        self.sumo_cmd = [sumo_path, "-c", cfg_path]
+        self.sumo_cmd = [sumo_path, "-c", cfg_path, "--time-to-teleport", "-1"]
         traci.start(self.sumo_cmd)
 
         self.traffic_id = "0"
         self.lanearea_ids = traci.lanearea.getIDList()
+        self.vehicle_ids = []
         self.duration = duration
 
-        self.score = 0
         self.frame_iteration = 0
+        self.score = 0
         self.reward = 0
 
         self.traffic_state = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -32,20 +32,24 @@ class TraciSim:
             [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
         self.jam_length = np.array(
             [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+        self.vehicle_waiting_time = 0
 
     def reset(self):
         traci.close()
         traci.start(self.sumo_cmd)
 
+        self.vehicle_ids = []
+
+        self.frame_iteration = 0
         self.score = 0
         self.reward = 0
-        self.frame_iteration = 0
 
         self.traffic_state = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self.mean_speeds = np.array(
             [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
         self.jam_length = np.array(
             [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+        self.vehicle_waiting_time = 0
 
     def getMeanSpeedInLanearea(self, lanearea_ids: tuple) -> None:
         """returns [eastLAD0, eastLAD1, northLAD0, ... , westLAD2]"""
@@ -138,9 +142,16 @@ class TraciSim:
         # set state
         traci.trafficlight.setRedYellowGreenState(traffic_id, _state_string)
 
+    def getVehicleWaitingTimes(self, vehicle_ids):
+        waiting_times = [traci.vehicle.getWaitingTime(
+            vehicle_id) for vehicle_id in vehicle_ids]
+
+        return waiting_times
+
     def play_step(self, traffic_state):
         # TODO: reward giving
         game_over = False
+        self.vehicle_ids = traci.vehicle.getIDList()
         self.reward = 0
 
         # game over if duration exceeds limit
@@ -148,22 +159,41 @@ class TraciSim:
             game_over = True
             return self.reward, game_over, self.score
 
+        if self.vehicle_waiting_time > 50000:
+            game_over = True
+            self.reward = -1000
+            return self.reward, game_over, self.score
+
         # give punishments if:
         # vehicles collide
         # vehicles emergency stop
-        for i in range(traci.simulation.getCollidingVehiclesNumber()):
-            self.reward -= 0.1
 
-        for i in range(traci.simulation.getEmergencyStoppingVehiclesNumber()):
-            self.reward -= 0.1
+        if self.frame_iteration >= 200:
+            for i in range(traci.simulation.getEmergencyStoppingVehiclesNumber()):
+                self.reward -= 20
 
-            self.reward += np.average(self.mean_speeds) * 0.5
+            # reward based on mean speed
+            self.reward += np.sum(self.mean_speeds) * 0.2
 
-        # TODO: make this score be something that we want to aim for, like queue length or waiting times
+            # reward if jam is less
+            # scale the reward based on time elapsed (eg. *0 at frame 0, *1 at frame 1000)
+            # self.reward += (np.sum(self.jam_length) * -1 + 8) * \
+            #     (min(self.frame_iteration, 1000) / 1000)
+            self.reward -= np.sum(self.jam_length) * 0.5 - 3
+
+            # punish if waiting times are long
+            self.reward -= np.sum(self.vehicle_waiting_time) * 1e-4
+        else:
+            self.reward = 0
+
+            # TODO: make this score be something that we want to aim for, like queue length or waiting times
         self.score += traci.simulation.getArrivedNumber()
 
+        # get info about the current state
         self.getJamLengthInLanearea(self.lanearea_ids)
         self.getMeanSpeedInLanearea(self.lanearea_ids)
+        self.vehicle_waiting_time = np.sum(self.getVehicleWaitingTimes(
+            self.vehicle_ids))
 
         # traffic state is the input
         self.traffic_state = traffic_state
