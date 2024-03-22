@@ -8,13 +8,15 @@ import os
 
 
 class TraciSim:
-    def __init__(self, duration=5000) -> None:
+    def __init__(self, duration=1000) -> None:
         if os.name == 'nt':
             sumo_path = "C:/Program Files (x86)/Eclipse/Sumo/bin/sumo.exe"
+            cfg_path = "../sumo-things/main.sumocfg"
         else:
-            sumo_path = "/usr/share/sumo/bin/sumo"
+            sumo_path = "/usr/share/sumo/bin/sumo-gui"
+            cfg_path = "./sumo-things/main.sumocfg"
 
-        self.sumo_cmd = [sumo_path, "-c", "../sumo-things/main.sumocfg"]
+        self.sumo_cmd = [sumo_path, "-c", cfg_path]
         traci.start(self.sumo_cmd)
 
         self.traffic_id = "0"

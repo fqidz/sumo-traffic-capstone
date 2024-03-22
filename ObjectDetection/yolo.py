@@ -1,16 +1,8 @@
-# from ultralytics import YOLO
-# import cv2
-#
-# model = YOLO("yolov8x.pt")
-#
-# results = model.predict(source=2, show=True)
-#
-# print(results)
 from ultralytics import YOLO
 from ultralytics.solutions import distance_calculation
 import cv2
 
-model = YOLO("yolov8m.pt")
+model = YOLO("yolov8l.pt")
 names = model.model.names
 
 cap = cv2.VideoCapture(2)
@@ -18,11 +10,11 @@ assert cap.isOpened(), "Error reading video file"
 w, h, fps = (int(cap.get(x)) for x in (cv2.CAP_PROP_FRAME_WIDTH,
              cv2.CAP_PROP_FRAME_HEIGHT, cv2.CAP_PROP_FPS))
 
-# Video writer
-video_writer = cv2.VideoWriter("distance_calculation.avi",
-                               cv2.VideoWriter_fourcc(*'mp4v'),
-                               fps,
-                               (w, h))
+# # Video writer
+# video_writer = cv2.VideoWriter("distance_calculation.avi",
+#                                cv2.VideoWriter_fourcc(*'mp4v'),
+#                                fps,
+#                                (w, h))
 
 # Init distance-calculation obj
 dist_obj = distance_calculation.DistanceCalculation()
@@ -36,8 +28,8 @@ while cap.isOpened():
 
     tracks = model.track(im0, persist=True, show=False)
     im0 = dist_obj.start_process(im0, tracks)
-    video_writer.write(im0)
+#    video_writer.write(im0)
 
 cap.release()
-video_writer.release()
+# video_writer.release()
 cv2.destroyAllWindows()
