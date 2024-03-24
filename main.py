@@ -2,7 +2,8 @@ from sumo_rl import SumoEnvironment
 from stable_baselines3.dqn.dqn import DQN
 import numpy as np
 
-num_seconds = 43200
+# num_seconds = 43200
+num_seconds = 5000
 episodes = 100
 
 # reward_fns = {
@@ -25,7 +26,7 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       out_csv_name='./sumo-things/output/dqn',
                       reward_fn=my_reward_fn,
                       yellow_time=4,
-                      use_gui=True,
+#                     use_gui=True,
                       single_agent=True,
                       num_seconds=num_seconds)
 
