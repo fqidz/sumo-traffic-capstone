@@ -203,3 +203,9 @@ class TraciSim:
         self.frame_iteration += 1
 
         return self.reward, game_over, self.score
+
+
+if __name__ == "__main__":
+    gui = TraciSim()
+    gui.play_step([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+    print(traci.trafficlight.getControlledLanes("0"))
