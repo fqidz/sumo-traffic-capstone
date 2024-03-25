@@ -15,13 +15,26 @@ def my_reward_fn(traffic_signal):
     return speed + queue
 
 
+use_gui = False
+
+gui_prompt = input("Use GUI? (y/N):").lower()
+gui_prompt = "".join(gui_prompt.split())
+
+if gui_prompt == "y":
+    use_gui = True
+elif gui_prompt == "n" or not gui_prompt:
+    use_gui = False
+else:
+    raise Exception("Wrong Input")
+
+
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
                       out_csv_name='./output/dqn-stats/traffic_sim',
                       reward_fn=my_reward_fn,
                       yellow_time=4,
                       time_to_teleport=2000,
-                      use_gui=True,
+                      use_gui=use_gui,
                       single_agent=True,
                       num_seconds=num_seconds)
 
