@@ -1,5 +1,6 @@
 from sumo_rl import SumoEnvironment
 from stable_baselines3.dqn.dqn import DQN
+from stable_baselines3.common.callbacks import CheckpointCallback
 import numpy as np
 
 
@@ -36,20 +37,31 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       time_to_teleport=2000,
                       use_gui=use_gui,
                       single_agent=True,
-                      num_seconds=num_seconds)
+                      num_seconds=num_seconds,
+                      )
 
 model = DQN(
     env=env,
     policy="MlpPolicy",
     learning_rate=1e-3,
     learning_starts=0,
-    buffer_size=50000,
+    buffer_size=200000,
     train_freq=1,
     target_update_interval=500,
     exploration_fraction=0.05,
     exploration_final_eps=0.01,
     verbose=1,
+    tensorboard_log="./output/logs/"
 )
 
+checkpoint_callback = CheckpointCallback(
+    save_freq=num_seconds * 5,
+    save_path='./output/model_checkpoints/',
+    name_prefix="traffic_sim",
+    save_replay_buffer=True,
+    save_vecnormalize=True,
+    verbose=2,
+)
 
-model.learn(total_timesteps=num_seconds * episodes, log_interval=1)
+model.learn(
+    total_timesteps=num_seconds * episodes, log_interval=1, callback=checkpoint_callback)
