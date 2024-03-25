@@ -1,2 +1,4 @@
-traci
 matplotlib
+stable-baselines3
+sumo-rl
+ultralytics

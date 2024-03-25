@@ -4,15 +4,8 @@ import numpy as np
 
 
 # num_seconds = 43200
-num_seconds = 5000
+num_seconds = 43500
 episodes = 100
-
-# reward_fns = {
-#     "diff-waiting-time": _diff_waiting_time_reward,
-#     "average-speed": _average_speed_reward,
-#     "queue": _queue_reward,
-#     "pressure": _pressure_reward,
-# }
 
 
 def my_reward_fn(traffic_signal):
@@ -24,10 +17,11 @@ def my_reward_fn(traffic_signal):
 
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
-                      out_csv_name='./sumo-things/output/dqn',
+                      out_csv_name='./output/dqn-stats/traffic_sim',
                       reward_fn=my_reward_fn,
                       yellow_time=4,
-                      # use_gui=True,
+                      time_to_teleport=2000,
+                      use_gui=True,
                       single_agent=True,
                       num_seconds=num_seconds)
 
