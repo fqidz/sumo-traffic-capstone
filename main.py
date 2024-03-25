@@ -2,6 +2,7 @@ from sumo_rl import SumoEnvironment
 from stable_baselines3.dqn.dqn import DQN
 import numpy as np
 
+
 # num_seconds = 43200
 num_seconds = 5000
 episodes = 100
