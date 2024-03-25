@@ -1,7 +1,2 @@
 traci
-torch
-torchvision
-torchaudio
-numpy
 matplotlib
-sumo-rl

@@ -26,7 +26,7 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       out_csv_name='./sumo-things/output/dqn',
                       reward_fn=my_reward_fn,
                       yellow_time=4,
-#                     use_gui=True,
+                      # use_gui=True,
                       single_agent=True,
                       num_seconds=num_seconds)
 
