@@ -1,3 +1,5 @@
 .venv
 .idea/**
 yolov8*
+output/model_checkpoints
+output/dqn_stats

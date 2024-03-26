@@ -6,6 +6,7 @@ import numpy as np
 
 # num_seconds = 43200
 num_seconds = 43500
+agent_steps = -(-num_seconds // 5)
 episodes = 100
 
 
@@ -45,7 +46,7 @@ model = DQN(
     policy="MlpPolicy",
     learning_rate=1e-3,
     learning_starts=0,
-    buffer_size=200000,
+    buffer_size=50000,
     train_freq=1,
     target_update_interval=500,
     exploration_fraction=0.05,
@@ -55,7 +56,7 @@ model = DQN(
 )
 
 checkpoint_callback = CheckpointCallback(
-    save_freq=num_seconds * 5,
+    save_freq=agent_steps * 5,
     save_path='./output/model_checkpoints/',
     name_prefix="traffic_sim",
     save_replay_buffer=True,
@@ -64,4 +65,4 @@ checkpoint_callback = CheckpointCallback(
 )
 
 model.learn(
-    total_timesteps=num_seconds * episodes, log_interval=1, callback=checkpoint_callback)
+    total_timesteps=agent_steps * episodes, log_interval=1, callback=checkpoint_callback)
