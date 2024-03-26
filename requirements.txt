@@ -2,3 +2,4 @@ matplotlib
 stable-baselines3
 sumo-rl
 ultralytics
+tensorboard
