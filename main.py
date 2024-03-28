@@ -1,13 +1,14 @@
 from sumo_rl import SumoEnvironment
 from stable_baselines3.dqn.dqn import DQN
 from stable_baselines3.common.callbacks import CheckpointCallback
+from pathlib import Path
 import numpy as np
 
 
 # num_seconds = 43200
 num_seconds = 43500
 agent_steps = -(-num_seconds // 5)
-episodes = 100
+episodes = 150
 
 
 def my_reward_fn(traffic_signal):
@@ -69,12 +70,14 @@ model = DQN(
     tensorboard_log="./output/logs/"
 )
 
-load_checkpoint = ask_user("Load model checkpoint? (y/N) ")
-if load_checkpoint:
-    model.load('./output/model_checkpoints/traffic_sim_1957500_steps.zip', env=env)
-    model.load_replay_buffer(
-        './output/model_checkpoints/traffic_sim_replay_buffer_1957500_steps.pkl')
-    print("checkpoint loaded")
+load_model = ask_user("Load model? (y/N) ")
+if load_model:
+    pass
+    # if load_model:
+    #     model.load('./output/model_checkpoints/traffic_sim_1957500_steps.zip', env=env)
+    #     model.load_replay_buffer(
+    #         './output/model_checkpoints/traffic_sim_replay_buffer_1957500_steps.pkl')
+    #     print("checkpoint loaded")
 
 checkpoint_callback = CheckpointCallback(
     save_freq=agent_steps * 5,
@@ -85,5 +88,9 @@ checkpoint_callback = CheckpointCallback(
     verbose=2,
 )
 
+Path("./output/model_saved/").mkdir(parents=True, exist_ok=True)
+
 model.learn(
     total_timesteps=agent_steps * episodes, log_interval=1, callback=checkpoint_callback)
+model.save("./output/model_saved/")
+print("Model saved to ./output/model_saved/")
