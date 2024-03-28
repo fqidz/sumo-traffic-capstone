@@ -39,6 +39,8 @@ def ask_user(prompt: str) -> bool:
 
 use_gui = ask_user("Use GUI? (y/N) ")
 
+Path("./output/dqn-stats/").mkdir(parents=True, exist_ok=True)
+
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
                       out_csv_name='./output/dqn-stats/traffic_sim',
@@ -49,6 +51,9 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       single_agent=True,
                       num_seconds=num_seconds,
                       )
+
+Path("./output/logs/").mkdir(parents=True, exist_ok=True)
+Path("./output/model_checkpoints/").mkdir(parents=True, exist_ok=True)
 
 model = DQN(
     env=env,
