@@ -17,18 +17,27 @@ def my_reward_fn(traffic_signal):
     return speed + queue
 
 
-use_gui = False
+def ask_user(prompt: str) -> bool:
+    repeat = True
+    answer = False
 
-gui_prompt = input("Use GUI? (y/N):").lower()
-gui_prompt = "".join(gui_prompt.split())
+    prompt_answer = input(prompt).lower()
+    prompt_answer = "".join(prompt_answer.split())
 
-if gui_prompt == "y":
-    use_gui = True
-elif gui_prompt == "n" or not gui_prompt:
-    use_gui = False
-else:
-    raise Exception("Wrong Input")
+    while repeat:
+        if prompt_answer == "y":
+            answer = True
+            repeat = False
+        elif prompt_answer == "n" or not prompt_answer:
+            answer = False
+            repeat = False
+        else:
+            repeat = True
 
+    return answer
+
+
+use_gui = ask_user("Use GUI? (y/N) ")
 
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
@@ -54,6 +63,13 @@ model = DQN(
     verbose=1,
     tensorboard_log="./output/logs/"
 )
+
+load_checkpoint = ask_user("Load model checkpoint? (y/N) ")
+if load_checkpoint:
+    model.load('./output/model_checkpoints/traffic_sim_1957500_steps.zip', env=env)
+    model.load_replay_buffer(
+        './output/model_checkpoints/traffic_sim_replay_buffer_1957500_steps.pkl')
+    print("checkpoint loaded")
 
 checkpoint_callback = CheckpointCallback(
     save_freq=agent_steps * 5,

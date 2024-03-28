@@ -1,5 +1,6 @@
 import csv
-import os
+
+# TODO: change color of the other cars
 
 
 class VehicleFlowConverter():
@@ -26,19 +27,22 @@ class VehicleFlowConverter():
                         route = flow_id
                         unique_id = f"{flow_id}{j}"
 
-                        vehs_per_hour = row[i + 2]
+                        vehs_per_hour = int(row[i + 2])
 
                         # Write flow element
                         # xmlfile.write(f'    <flow id="{vehicle_type}{unique_id}" type="{vehicle_type}" begin="{begin}.00" route="{
                         #               route}" end="{end}.00" vehsPerHour="{vehs_per_hour}"/>\n')
-                        flow_data[count] = [unique_id,
-                                            vehicle_type,
-                                            begin,
-                                            route,
-                                            end,
-                                            vehs_per_hour
-                                            ]
-                        count += 1
+                        if vehs_per_hour and vehs_per_hour != 0:
+                            flow_data[count] = [unique_id,
+                                                vehicle_type,
+                                                begin,
+                                                route,
+                                                end,
+                                                vehs_per_hour
+                                                ]
+                            count += 1
+                print(f"Processed {vehicle_type}")
+
         flow_data = {k: v for k, v in sorted(
             flow_data.items(), key=lambda x: x[1][2])}
 
@@ -53,8 +57,9 @@ class VehicleFlowConverter():
 
 
 gen = VehicleFlowConverter(
-    ['passenger-density.csv', 'truck-density.csv'],
-    ['PASSENGER', 'TRUCK'],
+    ['passenger-density.csv', 'truck-density.csv',
+        'bus-density.csv'],
+    ['PASSENGER', 'TRUCK', 'BUS'],
     'traffic_data.xml'
 )
 

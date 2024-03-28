@@ -30,6 +30,10 @@
     <flow id="TRUCKw_to_n0" type="TRUCK" begin="0.00" route="w_to_n" end="1800.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s0" type="TRUCK" begin="0.00" route="w_to_s" end="1800.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w0" type="TRUCK" begin="0.00" route="w_to_w" end="1800.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s0" type="BUS" begin="0.00" route="e_to_s" end="1800.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w0" type="BUS" begin="0.00" route="e_to_w" end="1800.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e0" type="BUS" begin="0.00" route="s_to_e" end="1800.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e0" type="BUS" begin="0.00" route="w_to_e" end="1800.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e1" type="PASSENGER" begin="1800.00" route="e_to_e" end="3600.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n1" type="PASSENGER" begin="1800.00" route="e_to_n" end="3600.00" vehsPerHour="180"/>
     <flow id="PASSENGERe_to_s1" type="PASSENGER" begin="1800.00" route="e_to_s" end="3600.00" vehsPerHour="60"/>
@@ -62,6 +66,10 @@
     <flow id="TRUCKw_to_n1" type="TRUCK" begin="1800.00" route="w_to_n" end="3600.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s1" type="TRUCK" begin="1800.00" route="w_to_s" end="3600.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w1" type="TRUCK" begin="1800.00" route="w_to_w" end="3600.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s1" type="BUS" begin="1800.00" route="e_to_s" end="3600.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w1" type="BUS" begin="1800.00" route="e_to_w" end="3600.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e1" type="BUS" begin="1800.00" route="s_to_e" end="3600.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e1" type="BUS" begin="1800.00" route="w_to_e" end="3600.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e2" type="PASSENGER" begin="3600.00" route="e_to_e" end="5400.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n2" type="PASSENGER" begin="3600.00" route="e_to_n" end="5400.00" vehsPerHour="180"/>
     <flow id="PASSENGERe_to_s2" type="PASSENGER" begin="3600.00" route="e_to_s" end="5400.00" vehsPerHour="60"/>
@@ -94,6 +102,10 @@
     <flow id="TRUCKw_to_n2" type="TRUCK" begin="3600.00" route="w_to_n" end="5400.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s2" type="TRUCK" begin="3600.00" route="w_to_s" end="5400.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w2" type="TRUCK" begin="3600.00" route="w_to_w" end="5400.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s2" type="BUS" begin="3600.00" route="e_to_s" end="5400.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w2" type="BUS" begin="3600.00" route="e_to_w" end="5400.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e2" type="BUS" begin="3600.00" route="s_to_e" end="5400.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e2" type="BUS" begin="3600.00" route="w_to_e" end="5400.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e3" type="PASSENGER" begin="5400.00" route="e_to_e" end="7200.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n3" type="PASSENGER" begin="5400.00" route="e_to_n" end="7200.00" vehsPerHour="180"/>
     <flow id="PASSENGERe_to_s3" type="PASSENGER" begin="5400.00" route="e_to_s" end="7200.00" vehsPerHour="60"/>
@@ -126,6 +138,10 @@
     <flow id="TRUCKw_to_n3" type="TRUCK" begin="5400.00" route="w_to_n" end="7200.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s3" type="TRUCK" begin="5400.00" route="w_to_s" end="7200.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w3" type="TRUCK" begin="5400.00" route="w_to_w" end="7200.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s3" type="BUS" begin="5400.00" route="e_to_s" end="7200.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w3" type="BUS" begin="5400.00" route="e_to_w" end="7200.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e3" type="BUS" begin="5400.00" route="s_to_e" end="7200.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e3" type="BUS" begin="5400.00" route="w_to_e" end="7200.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e4" type="PASSENGER" begin="7200.00" route="e_to_e" end="9000.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n4" type="PASSENGER" begin="7200.00" route="e_to_n" end="9000.00" vehsPerHour="180"/>
     <flow id="PASSENGERe_to_s4" type="PASSENGER" begin="7200.00" route="e_to_s" end="9000.00" vehsPerHour="60"/>
@@ -158,6 +174,10 @@
     <flow id="TRUCKw_to_n4" type="TRUCK" begin="7200.00" route="w_to_n" end="9000.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s4" type="TRUCK" begin="7200.00" route="w_to_s" end="9000.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w4" type="TRUCK" begin="7200.00" route="w_to_w" end="9000.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s4" type="BUS" begin="7200.00" route="e_to_s" end="9000.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w4" type="BUS" begin="7200.00" route="e_to_w" end="9000.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e4" type="BUS" begin="7200.00" route="s_to_e" end="9000.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e4" type="BUS" begin="7200.00" route="w_to_e" end="9000.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e5" type="PASSENGER" begin="9000.00" route="e_to_e" end="10800.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n5" type="PASSENGER" begin="9000.00" route="e_to_n" end="10800.00" vehsPerHour="180"/>
     <flow id="PASSENGERe_to_s5" type="PASSENGER" begin="9000.00" route="e_to_s" end="10800.00" vehsPerHour="60"/>
@@ -190,6 +210,10 @@
     <flow id="TRUCKw_to_n5" type="TRUCK" begin="9000.00" route="w_to_n" end="10800.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s5" type="TRUCK" begin="9000.00" route="w_to_s" end="10800.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w5" type="TRUCK" begin="9000.00" route="w_to_w" end="10800.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s5" type="BUS" begin="9000.00" route="e_to_s" end="10800.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w5" type="BUS" begin="9000.00" route="e_to_w" end="10800.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e5" type="BUS" begin="9000.00" route="s_to_e" end="10800.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e5" type="BUS" begin="9000.00" route="w_to_e" end="10800.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e6" type="PASSENGER" begin="10800.00" route="e_to_e" end="12600.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n6" type="PASSENGER" begin="10800.00" route="e_to_n" end="12600.00" vehsPerHour="180"/>
     <flow id="PASSENGERe_to_s6" type="PASSENGER" begin="10800.00" route="e_to_s" end="12600.00" vehsPerHour="60"/>
@@ -222,6 +246,10 @@
     <flow id="TRUCKw_to_n6" type="TRUCK" begin="10800.00" route="w_to_n" end="12600.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s6" type="TRUCK" begin="10800.00" route="w_to_s" end="12600.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w6" type="TRUCK" begin="10800.00" route="w_to_w" end="12600.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s6" type="BUS" begin="10800.00" route="e_to_s" end="12600.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w6" type="BUS" begin="10800.00" route="e_to_w" end="12600.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e6" type="BUS" begin="10800.00" route="s_to_e" end="12600.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e6" type="BUS" begin="10800.00" route="w_to_e" end="12600.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e7" type="PASSENGER" begin="12600.00" route="e_to_e" end="14400.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n7" type="PASSENGER" begin="12600.00" route="e_to_n" end="14400.00" vehsPerHour="180"/>
     <flow id="PASSENGERe_to_s7" type="PASSENGER" begin="12600.00" route="e_to_s" end="14400.00" vehsPerHour="60"/>
@@ -254,6 +282,10 @@
     <flow id="TRUCKw_to_n7" type="TRUCK" begin="12600.00" route="w_to_n" end="14400.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s7" type="TRUCK" begin="12600.00" route="w_to_s" end="14400.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w7" type="TRUCK" begin="12600.00" route="w_to_w" end="14400.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s7" type="BUS" begin="12600.00" route="e_to_s" end="14400.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w7" type="BUS" begin="12600.00" route="e_to_w" end="14400.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e7" type="BUS" begin="12600.00" route="s_to_e" end="14400.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e7" type="BUS" begin="12600.00" route="w_to_e" end="14400.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e8" type="PASSENGER" begin="14400.00" route="e_to_e" end="16200.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n8" type="PASSENGER" begin="14400.00" route="e_to_n" end="16200.00" vehsPerHour="180"/>
     <flow id="PASSENGERe_to_s8" type="PASSENGER" begin="14400.00" route="e_to_s" end="16200.00" vehsPerHour="60"/>
@@ -286,6 +318,10 @@
     <flow id="TRUCKw_to_n8" type="TRUCK" begin="14400.00" route="w_to_n" end="16200.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s8" type="TRUCK" begin="14400.00" route="w_to_s" end="16200.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w8" type="TRUCK" begin="14400.00" route="w_to_w" end="16200.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s8" type="BUS" begin="14400.00" route="e_to_s" end="16200.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w8" type="BUS" begin="14400.00" route="e_to_w" end="16200.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e8" type="BUS" begin="14400.00" route="s_to_e" end="16200.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e8" type="BUS" begin="14400.00" route="w_to_e" end="16200.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e9" type="PASSENGER" begin="16200.00" route="e_to_e" end="18000.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n9" type="PASSENGER" begin="16200.00" route="e_to_n" end="18000.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s9" type="PASSENGER" begin="16200.00" route="e_to_s" end="18000.00" vehsPerHour="60"/>
@@ -318,6 +354,10 @@
     <flow id="TRUCKw_to_n9" type="TRUCK" begin="16200.00" route="w_to_n" end="18000.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s9" type="TRUCK" begin="16200.00" route="w_to_s" end="18000.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w9" type="TRUCK" begin="16200.00" route="w_to_w" end="18000.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s9" type="BUS" begin="16200.00" route="e_to_s" end="18000.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w9" type="BUS" begin="16200.00" route="e_to_w" end="18000.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e9" type="BUS" begin="16200.00" route="s_to_e" end="18000.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e9" type="BUS" begin="16200.00" route="w_to_e" end="18000.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e10" type="PASSENGER" begin="18000.00" route="e_to_e" end="19800.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n10" type="PASSENGER" begin="18000.00" route="e_to_n" end="19800.00" vehsPerHour="330"/>
     <flow id="PASSENGERe_to_s10" type="PASSENGER" begin="18000.00" route="e_to_s" end="19800.00" vehsPerHour="60"/>
@@ -350,6 +390,10 @@
     <flow id="TRUCKw_to_n10" type="TRUCK" begin="18000.00" route="w_to_n" end="19800.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s10" type="TRUCK" begin="18000.00" route="w_to_s" end="19800.00" vehsPerHour="19"/>
     <flow id="TRUCKw_to_w10" type="TRUCK" begin="18000.00" route="w_to_w" end="19800.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s10" type="BUS" begin="18000.00" route="e_to_s" end="19800.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w10" type="BUS" begin="18000.00" route="e_to_w" end="19800.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e10" type="BUS" begin="18000.00" route="s_to_e" end="19800.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e10" type="BUS" begin="18000.00" route="w_to_e" end="19800.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e11" type="PASSENGER" begin="19800.00" route="e_to_e" end="21600.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n11" type="PASSENGER" begin="19800.00" route="e_to_n" end="21600.00" vehsPerHour="360"/>
     <flow id="PASSENGERe_to_s11" type="PASSENGER" begin="19800.00" route="e_to_s" end="21600.00" vehsPerHour="60"/>
@@ -382,6 +426,10 @@
     <flow id="TRUCKw_to_n11" type="TRUCK" begin="19800.00" route="w_to_n" end="21600.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s11" type="TRUCK" begin="19800.00" route="w_to_s" end="21600.00" vehsPerHour="19"/>
     <flow id="TRUCKw_to_w11" type="TRUCK" begin="19800.00" route="w_to_w" end="21600.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s11" type="BUS" begin="19800.00" route="e_to_s" end="21600.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w11" type="BUS" begin="19800.00" route="e_to_w" end="21600.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e11" type="BUS" begin="19800.00" route="s_to_e" end="21600.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e11" type="BUS" begin="19800.00" route="w_to_e" end="21600.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e12" type="PASSENGER" begin="21600.00" route="e_to_e" end="23400.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n12" type="PASSENGER" begin="21600.00" route="e_to_n" end="23400.00" vehsPerHour="330"/>
     <flow id="PASSENGERe_to_s12" type="PASSENGER" begin="21600.00" route="e_to_s" end="23400.00" vehsPerHour="60"/>
@@ -414,6 +462,10 @@
     <flow id="TRUCKw_to_n12" type="TRUCK" begin="21600.00" route="w_to_n" end="23400.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s12" type="TRUCK" begin="21600.00" route="w_to_s" end="23400.00" vehsPerHour="19"/>
     <flow id="TRUCKw_to_w12" type="TRUCK" begin="21600.00" route="w_to_w" end="23400.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s12" type="BUS" begin="21600.00" route="e_to_s" end="23400.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w12" type="BUS" begin="21600.00" route="e_to_w" end="23400.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e12" type="BUS" begin="21600.00" route="s_to_e" end="23400.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e12" type="BUS" begin="21600.00" route="w_to_e" end="23400.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e13" type="PASSENGER" begin="23400.00" route="e_to_e" end="25200.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n13" type="PASSENGER" begin="23400.00" route="e_to_n" end="25200.00" vehsPerHour="330"/>
     <flow id="PASSENGERe_to_s13" type="PASSENGER" begin="23400.00" route="e_to_s" end="25200.00" vehsPerHour="60"/>
@@ -446,6 +498,10 @@
     <flow id="TRUCKw_to_n13" type="TRUCK" begin="23400.00" route="w_to_n" end="25200.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s13" type="TRUCK" begin="23400.00" route="w_to_s" end="25200.00" vehsPerHour="19"/>
     <flow id="TRUCKw_to_w13" type="TRUCK" begin="23400.00" route="w_to_w" end="25200.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s13" type="BUS" begin="23400.00" route="e_to_s" end="25200.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w13" type="BUS" begin="23400.00" route="e_to_w" end="25200.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e13" type="BUS" begin="23400.00" route="s_to_e" end="25200.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e13" type="BUS" begin="23400.00" route="w_to_e" end="25200.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e14" type="PASSENGER" begin="25200.00" route="e_to_e" end="27000.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n14" type="PASSENGER" begin="25200.00" route="e_to_n" end="27000.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s14" type="PASSENGER" begin="25200.00" route="e_to_s" end="27000.00" vehsPerHour="60"/>
@@ -478,6 +534,10 @@
     <flow id="TRUCKw_to_n14" type="TRUCK" begin="25200.00" route="w_to_n" end="27000.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s14" type="TRUCK" begin="25200.00" route="w_to_s" end="27000.00" vehsPerHour="19"/>
     <flow id="TRUCKw_to_w14" type="TRUCK" begin="25200.00" route="w_to_w" end="27000.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s14" type="BUS" begin="25200.00" route="e_to_s" end="27000.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w14" type="BUS" begin="25200.00" route="e_to_w" end="27000.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e14" type="BUS" begin="25200.00" route="s_to_e" end="27000.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e14" type="BUS" begin="25200.00" route="w_to_e" end="27000.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e15" type="PASSENGER" begin="27000.00" route="e_to_e" end="28800.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n15" type="PASSENGER" begin="27000.00" route="e_to_n" end="28800.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s15" type="PASSENGER" begin="27000.00" route="e_to_s" end="28800.00" vehsPerHour="60"/>
@@ -510,6 +570,10 @@
     <flow id="TRUCKw_to_n15" type="TRUCK" begin="27000.00" route="w_to_n" end="28800.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s15" type="TRUCK" begin="27000.00" route="w_to_s" end="28800.00" vehsPerHour="19"/>
     <flow id="TRUCKw_to_w15" type="TRUCK" begin="27000.00" route="w_to_w" end="28800.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s15" type="BUS" begin="27000.00" route="e_to_s" end="28800.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w15" type="BUS" begin="27000.00" route="e_to_w" end="28800.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e15" type="BUS" begin="27000.00" route="s_to_e" end="28800.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e15" type="BUS" begin="27000.00" route="w_to_e" end="28800.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e16" type="PASSENGER" begin="28800.00" route="e_to_e" end="30600.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n16" type="PASSENGER" begin="28800.00" route="e_to_n" end="30600.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s16" type="PASSENGER" begin="28800.00" route="e_to_s" end="30600.00" vehsPerHour="60"/>
@@ -542,6 +606,10 @@
     <flow id="TRUCKw_to_n16" type="TRUCK" begin="28800.00" route="w_to_n" end="30600.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s16" type="TRUCK" begin="28800.00" route="w_to_s" end="30600.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w16" type="TRUCK" begin="28800.00" route="w_to_w" end="30600.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s16" type="BUS" begin="28800.00" route="e_to_s" end="30600.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w16" type="BUS" begin="28800.00" route="e_to_w" end="30600.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e16" type="BUS" begin="28800.00" route="s_to_e" end="30600.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e16" type="BUS" begin="28800.00" route="w_to_e" end="30600.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e17" type="PASSENGER" begin="30600.00" route="e_to_e" end="32400.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n17" type="PASSENGER" begin="30600.00" route="e_to_n" end="32400.00" vehsPerHour="255"/>
     <flow id="PASSENGERe_to_s17" type="PASSENGER" begin="30600.00" route="e_to_s" end="32400.00" vehsPerHour="60"/>
@@ -574,6 +642,10 @@
     <flow id="TRUCKw_to_n17" type="TRUCK" begin="30600.00" route="w_to_n" end="32400.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s17" type="TRUCK" begin="30600.00" route="w_to_s" end="32400.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w17" type="TRUCK" begin="30600.00" route="w_to_w" end="32400.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s17" type="BUS" begin="30600.00" route="e_to_s" end="32400.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w17" type="BUS" begin="30600.00" route="e_to_w" end="32400.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e17" type="BUS" begin="30600.00" route="s_to_e" end="32400.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e17" type="BUS" begin="30600.00" route="w_to_e" end="32400.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e18" type="PASSENGER" begin="32400.00" route="e_to_e" end="34200.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n18" type="PASSENGER" begin="32400.00" route="e_to_n" end="34200.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s18" type="PASSENGER" begin="32400.00" route="e_to_s" end="34200.00" vehsPerHour="60"/>
@@ -606,6 +678,10 @@
     <flow id="TRUCKw_to_n18" type="TRUCK" begin="32400.00" route="w_to_n" end="34200.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s18" type="TRUCK" begin="32400.00" route="w_to_s" end="34200.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w18" type="TRUCK" begin="32400.00" route="w_to_w" end="34200.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s18" type="BUS" begin="32400.00" route="e_to_s" end="34200.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w18" type="BUS" begin="32400.00" route="e_to_w" end="34200.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e18" type="BUS" begin="32400.00" route="s_to_e" end="34200.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e18" type="BUS" begin="32400.00" route="w_to_e" end="34200.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e19" type="PASSENGER" begin="34200.00" route="e_to_e" end="36000.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n19" type="PASSENGER" begin="34200.00" route="e_to_n" end="36000.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s19" type="PASSENGER" begin="34200.00" route="e_to_s" end="36000.00" vehsPerHour="60"/>
@@ -638,6 +714,10 @@
     <flow id="TRUCKw_to_n19" type="TRUCK" begin="34200.00" route="w_to_n" end="36000.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s19" type="TRUCK" begin="34200.00" route="w_to_s" end="36000.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w19" type="TRUCK" begin="34200.00" route="w_to_w" end="36000.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s19" type="BUS" begin="34200.00" route="e_to_s" end="36000.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w19" type="BUS" begin="34200.00" route="e_to_w" end="36000.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e19" type="BUS" begin="34200.00" route="s_to_e" end="36000.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e19" type="BUS" begin="34200.00" route="w_to_e" end="36000.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e20" type="PASSENGER" begin="36000.00" route="e_to_e" end="37800.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n20" type="PASSENGER" begin="36000.00" route="e_to_n" end="37800.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s20" type="PASSENGER" begin="36000.00" route="e_to_s" end="37800.00" vehsPerHour="60"/>
@@ -670,6 +750,10 @@
     <flow id="TRUCKw_to_n20" type="TRUCK" begin="36000.00" route="w_to_n" end="37800.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s20" type="TRUCK" begin="36000.00" route="w_to_s" end="37800.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w20" type="TRUCK" begin="36000.00" route="w_to_w" end="37800.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s20" type="BUS" begin="36000.00" route="e_to_s" end="37800.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w20" type="BUS" begin="36000.00" route="e_to_w" end="37800.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e20" type="BUS" begin="36000.00" route="s_to_e" end="37800.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e20" type="BUS" begin="36000.00" route="w_to_e" end="37800.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e21" type="PASSENGER" begin="37800.00" route="e_to_e" end="39600.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n21" type="PASSENGER" begin="37800.00" route="e_to_n" end="39600.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s21" type="PASSENGER" begin="37800.00" route="e_to_s" end="39600.00" vehsPerHour="60"/>
@@ -702,6 +786,10 @@
     <flow id="TRUCKw_to_n21" type="TRUCK" begin="37800.00" route="w_to_n" end="39600.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s21" type="TRUCK" begin="37800.00" route="w_to_s" end="39600.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w21" type="TRUCK" begin="37800.00" route="w_to_w" end="39600.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s21" type="BUS" begin="37800.00" route="e_to_s" end="39600.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w21" type="BUS" begin="37800.00" route="e_to_w" end="39600.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e21" type="BUS" begin="37800.00" route="s_to_e" end="39600.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e21" type="BUS" begin="37800.00" route="w_to_e" end="39600.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e22" type="PASSENGER" begin="39600.00" route="e_to_e" end="41400.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n22" type="PASSENGER" begin="39600.00" route="e_to_n" end="41400.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s22" type="PASSENGER" begin="39600.00" route="e_to_s" end="41400.00" vehsPerHour="60"/>
@@ -734,6 +822,10 @@
     <flow id="TRUCKw_to_n22" type="TRUCK" begin="39600.00" route="w_to_n" end="41400.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s22" type="TRUCK" begin="39600.00" route="w_to_s" end="41400.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w22" type="TRUCK" begin="39600.00" route="w_to_w" end="41400.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s22" type="BUS" begin="39600.00" route="e_to_s" end="41400.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w22" type="BUS" begin="39600.00" route="e_to_w" end="41400.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e22" type="BUS" begin="39600.00" route="s_to_e" end="41400.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e22" type="BUS" begin="39600.00" route="w_to_e" end="41400.00" vehsPerHour="2"/>
     <flow id="PASSENGERe_to_e23" type="PASSENGER" begin="41400.00" route="e_to_e" end="43200.00" vehsPerHour="45"/>
     <flow id="PASSENGERe_to_n23" type="PASSENGER" begin="41400.00" route="e_to_n" end="43200.00" vehsPerHour="270"/>
     <flow id="PASSENGERe_to_s23" type="PASSENGER" begin="41400.00" route="e_to_s" end="43200.00" vehsPerHour="60"/>
@@ -766,3 +858,7 @@
     <flow id="TRUCKw_to_n23" type="TRUCK" begin="41400.00" route="w_to_n" end="43200.00" vehsPerHour="5"/>
     <flow id="TRUCKw_to_s23" type="TRUCK" begin="41400.00" route="w_to_s" end="43200.00" vehsPerHour="14"/>
     <flow id="TRUCKw_to_w23" type="TRUCK" begin="41400.00" route="w_to_w" end="43200.00" vehsPerHour="4"/>
+    <flow id="BUSe_to_s23" type="BUS" begin="41400.00" route="e_to_s" end="43200.00" vehsPerHour="9"/>
+    <flow id="BUSe_to_w23" type="BUS" begin="41400.00" route="e_to_w" end="43200.00" vehsPerHour="10"/>
+    <flow id="BUSs_to_e23" type="BUS" begin="41400.00" route="s_to_e" end="43200.00" vehsPerHour="5"/>
+    <flow id="BUSw_to_e23" type="BUS" begin="41400.00" route="w_to_e" end="43200.00" vehsPerHour="2"/>
