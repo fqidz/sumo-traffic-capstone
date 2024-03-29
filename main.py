@@ -3,11 +3,12 @@ from stable_baselines3.dqn.dqn import DQN
 from pathlib import Path
 import numpy as np
 
-Path("./output/dqn-stats/").mkdir(parents=True, exist_ok=True)
+Path("./output/traffic-stats/").mkdir(parents=True, exist_ok=True)
 Path("./output/logs/").mkdir(parents=True, exist_ok=True)
+Path("./output/models/").mkdir(parents=True, exist_ok=True)
 
 num_seconds = 43500
-delta_time = 5
+delta_time = 10
 # total seconds divided by delta time (time it takes for ai to take action)
 agent_steps_per_episode = -(-num_seconds // delta_time)
 episodes = 150
@@ -44,11 +45,11 @@ use_gui = ask_user("Use GUI? (y/N) ")
 
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
-                      out_csv_name='./output/dqn-stats/traffic-sim',
+                      out_csv_name='./output/traffic-stats/traffic-sim',
                       reward_fn=my_reward_fn,
                       delta_time=delta_time,
                       yellow_time=4,
-                      min_green=30,
+                      min_green=10,
                       time_to_teleport=2000,
                       use_gui=use_gui,
                       single_agent=True,
@@ -58,7 +59,7 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
 
 load_model = ask_user("Load model? (y/N) ")
 if load_model:
-    model = DQN.load('./output/model_saved.zip', print_system_info=True)
+    model = DQN.load('./output/models/model1.zip', print_system_info=True)
     model.set_env(env=env)
     model.learn(
         total_timesteps=agent_steps_per_episode * episodes, log_interval=1, callback=None, reset_num_timesteps=False)
@@ -79,5 +80,5 @@ else:
     model.learn(
         total_timesteps=agent_steps_per_episode * episodes, log_interval=1, callback=None)
 
-model.save("./output/model_saved")
+model.save("./output/models/model3")
 print("Model saved to ./output/")

@@ -42,7 +42,7 @@ class DataProcessing():
                     file_name = os.path.split(file_path)[1]
                     # extract the number from the file
                     file_number = int(file_name.removeprefix(
-                        'traffic_sim_conn0_ep').removesuffix('.csv'))
+                        'traffic-sim_conn0_ep').removesuffix('.csv'))
                     # get the index of the header we're looking for
                     header_index = data[0].index(header)
 
@@ -56,8 +56,8 @@ class DataProcessing():
 
                     data_dict[file_number] = data_value
 
-            data_trimmed = self.trim_values(data_dict)
-            _data_dicts.append(dict(sorted(data_trimmed.items())))
+            # data_dict = self.trim_values(data_dict)
+            _data_dicts.append(dict(sorted(data_dict.items())))
 
         return _data_dicts
 
@@ -114,6 +114,7 @@ class DataProcessing():
     def load_csv(self) -> list[dict]:
         loaded_data = []
         for i, file_name in enumerate(self.output_file_names):
+            _ = file_name
             file = os.path.join(self.output_path, self.output_file_names[i])
             if isfile(file):
                 with open(file, newline='') as csvfile:
@@ -151,6 +152,7 @@ class DataProcessing():
             data_list.append(list(data.values()))
 
         fig, axs = plt.subplots(2)
+        _ = fig
         axs[0].plot(data_list[0])
         axs[1].plot(data_list[1], color='r')
         axs[0].set_title('Queue Length (No. of Vehicles)')
@@ -175,7 +177,7 @@ class DataProcessing():
 
 process = DataProcessing(
     ['0_queue_length', 'system_mean_speed'],
-    '/home/faidz-arante/Documents/sumo-traffic-capstone/output/dqn-stats/',
+    '/home/faidz-arante/Documents/sumo-traffic-capstone/output/traffic-stats/',
     '/home/faidz-arante/Documents/sumo-traffic-capstone/output/processed_data/',
     ['queue_length.csv', 'mean_speeds.csv'],
     ['up', 'down'],
