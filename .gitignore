@@ -2,5 +2,5 @@
 .idea/**
 yolov8*
 output/model_checkpoints
-output/dqn-stats
+output/dqn-stats*
 output.bak

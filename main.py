@@ -44,7 +44,7 @@ Path("./output/dqn-stats/").mkdir(parents=True, exist_ok=True)
 
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
-                      out_csv_name='./output/dqn-stats/traffic_sim',
+                      out_csv_name='./output/dqn-stats/traffic_sim_new_test',
                       reward_fn=my_reward_fn,
                       yellow_time=4,
                       time_to_teleport=2000,
@@ -56,23 +56,26 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
 Path("./output/logs/").mkdir(parents=True, exist_ok=True)
 Path("./output/model_checkpoints/").mkdir(parents=True, exist_ok=True)
 
-model = DQN(
-    env=env,
-    policy="MlpPolicy",
-    learning_rate=1e-3,
-    learning_starts=0,
-    buffer_size=50000,
-    train_freq=1,
-    target_update_interval=500,
-    exploration_fraction=0.05,
-    exploration_final_eps=0.01,
-    verbose=1,
-    tensorboard_log="./output/logs/"
-)
 
 load_model = ask_user("Load model? (y/N) ")
 if load_model:
-    pass
+    model = DQN.load('./output/model_saved.zip', print_system_info=True, env=env,
+                     custom_objects={'lr_schedule': 0.0, 'exploration_schedule': 0.0})
+else:
+    model = DQN(
+        env=env,
+        policy="MlpPolicy",
+        learning_rate=1e-3,
+        learning_starts=0,
+        buffer_size=50000,
+        train_freq=1,
+        target_update_interval=500,
+        exploration_fraction=0.05,
+        exploration_final_eps=0.01,
+        verbose=1,
+        tensorboard_log="./output/logs/"
+    )
+
     # if load_model:
     #     model.load('./output/model_checkpoints/traffic_sim_1957500_steps.zip', env=env)
     #     model.load_replay_buffer(
@@ -88,9 +91,7 @@ checkpoint_callback = CheckpointCallback(
     verbose=2,
 )
 
-Path("./output/model_saved/").mkdir(parents=True, exist_ok=True)
-
 model.learn(
     total_timesteps=agent_steps * episodes, log_interval=1, callback=checkpoint_callback)
-model.save("./output/model_saved/")
-print("Model saved to ./output/model_saved/")
+model.save("./output/model_saved")
+print("Model saved to ./output/")

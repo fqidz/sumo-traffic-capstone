@@ -3,6 +3,7 @@ import os
 from typing import Union
 import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import csv
 
 
@@ -152,6 +153,13 @@ class DataProcessing():
         fig, axs = plt.subplots(2)
         axs[0].plot(data_list[0])
         axs[1].plot(data_list[1], color='r')
+        axs[0].set_title('Queue Length (No. of Vehicles)')
+        axs[1].set_title('Mean Speeds (m/s)')
+        axs[0].set_yticks(np.arange(0, 900000, 50000))
+        axs[1].set_yticks(np.arange(0.0, 9.0, 0.5))
+        for ax in axs:
+            ax.grid(visible=True)
+
         plt.show()
 
     def run(self):
