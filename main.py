@@ -7,8 +7,9 @@ Path("./output/dqn-stats/").mkdir(parents=True, exist_ok=True)
 Path("./output/logs/").mkdir(parents=True, exist_ok=True)
 
 num_seconds = 43500
-# total seconds divided by 5 cause thats how long the ai takes to make a decision
-agent_steps_per_episode = -(-num_seconds // 5)
+delta_time = 5
+# total seconds divided by delta time (time it takes for ai to take action)
+agent_steps_per_episode = -(-num_seconds // delta_time)
 episodes = 150
 
 
@@ -45,7 +46,8 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
                       out_csv_name='./output/dqn-stats/traffic-sim',
                       reward_fn=my_reward_fn,
-                      yellow_time=5,
+                      delta_time=delta_time,
+                      yellow_time=4,
                       min_green=30,
                       time_to_teleport=2000,
                       use_gui=use_gui,
