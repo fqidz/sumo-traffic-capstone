@@ -1,13 +1,14 @@
 from sumo_rl import SumoEnvironment
 from stable_baselines3.dqn.dqn import DQN
-from stable_baselines3.common.callbacks import CheckpointCallback
 from pathlib import Path
 import numpy as np
 
+Path("./output/dqn-stats/").mkdir(parents=True, exist_ok=True)
+Path("./output/logs/").mkdir(parents=True, exist_ok=True)
 
-# num_seconds = 43200
 num_seconds = 43500
-agent_steps = -(-num_seconds // 5)
+# total seconds divided by 5 cause thats how long the ai takes to make a decision
+agent_steps_per_episode = -(-num_seconds // 5)
 episodes = 150
 
 
@@ -40,27 +41,25 @@ def ask_user(prompt: str) -> bool:
 
 use_gui = ask_user("Use GUI? (y/N) ")
 
-Path("./output/dqn-stats/").mkdir(parents=True, exist_ok=True)
-
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
-                      out_csv_name='./output/dqn-stats/traffic_sim_new_test',
+                      out_csv_name='./output/dqn-stats/traffic-sim',
                       reward_fn=my_reward_fn,
                       yellow_time=4,
+                      min_green=30,
                       time_to_teleport=2000,
                       use_gui=use_gui,
                       single_agent=True,
                       num_seconds=num_seconds,
                       )
 
-Path("./output/logs/").mkdir(parents=True, exist_ok=True)
-Path("./output/model_checkpoints/").mkdir(parents=True, exist_ok=True)
-
 
 load_model = ask_user("Load model? (y/N) ")
 if load_model:
-    model = DQN.load('./output/model_saved.zip', print_system_info=True, env=env,
-                     custom_objects={'lr_schedule': 0.0, 'exploration_schedule': 0.0})
+    model = DQN.load('./output/model_saved.zip', print_system_info=True)
+    model.set_env(env=env)
+    model.learn(
+        total_timesteps=agent_steps_per_episode * episodes, log_interval=1, callback=None, reset_num_timesteps=False)
 else:
     model = DQN(
         env=env,
@@ -75,23 +74,8 @@ else:
         verbose=1,
         tensorboard_log="./output/logs/"
     )
+    model.learn(
+        total_timesteps=agent_steps_per_episode * episodes, log_interval=1, callback=None)
 
-    # if load_model:
-    #     model.load('./output/model_checkpoints/traffic_sim_1957500_steps.zip', env=env)
-    #     model.load_replay_buffer(
-    #         './output/model_checkpoints/traffic_sim_replay_buffer_1957500_steps.pkl')
-    #     print("checkpoint loaded")
-
-checkpoint_callback = CheckpointCallback(
-    save_freq=agent_steps * 5,
-    save_path='./output/model_checkpoints/',
-    name_prefix="traffic_sim",
-    save_replay_buffer=True,
-    save_vecnormalize=True,
-    verbose=2,
-)
-
-model.learn(
-    total_timesteps=agent_steps * episodes, log_interval=1, callback=checkpoint_callback)
 model.save("./output/model_saved")
 print("Model saved to ./output/")
