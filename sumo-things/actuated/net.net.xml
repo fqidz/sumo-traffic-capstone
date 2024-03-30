@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2024-03-29 20:58:47 by Eclipse SUMO netedit Version v1_19_0+1552-1b122d1d49e
+<!-- generated on 2024-03-30 14:27:04 by Eclipse SUMO netedit Version v1_19_0+1552-1b122d1d49e
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/neteditConfiguration.xsd">
 
     <input>
-        <sumocfg-file value="/home/faidz-arante/Documents/sumo-traffic-capstone/sumo-things/main.sumocfg"/>
+        <sumocfg-file value="/home/faidz-arante/Documents/sumo-traffic-capstone/sumo-things/actuated/main.sumocfg"/>
+        <additional-files value="/home/faidz-arante/Documents/sumo-traffic-capstone/sumo-things/loops.add.xml"/>
         <route-files value="/home/faidz-arante/Documents/sumo-traffic-capstone/sumo-things/main.rou.xml"/>
         <sumo-net-file value="net.net.xml"/>
     </input>
@@ -238,19 +239,31 @@
         <lane id="64661021#4_2" index="2" disallow="tram rail_urban rail rail_electric rail_fast ship" speed="22.22" length="29.80" shape="2007.41,2120.10 1999.06,2148.90"/>
     </edge>
 
-    <tlLogic id="0" type="static" programID="0" offset="0">
-        <phase duration="30" state="GGrrrrrrrrrrGGrrrrrrrrrr"/>
+    <tlLogic id="0" type="actuated" programID="0" offset="0">
+        <phase duration="30" state="GGrrrrrrrrrrGGrrrrrrrrrr" minDur="10" maxDur="50"/>
         <phase duration="4"  state="yyrrrrrrrrrryyrrrrrrrrrr"/>
-        <phase duration="30" state="rrrrrrGGrrrrrrrsrrGGrrrr"/>
+        <phase duration="30" state="rrrrrrGGrrrrrrrsrrGGrrrr" minDur="10" maxDur="50"/>
         <phase duration="4"  state="rrrrrryyrrrrrrrrrryyrrrr"/>
-        <phase duration="30" state="GGGGGGrrrrrrrrrrrrrrrrrr"/>
+        <phase duration="30" state="GGGGGGrrrrrrrrrrrrrrrrrr" minDur="10" maxDur="50"/>
         <phase duration="4"  state="yyyyyyrrrrrrrrrrrrrrrrrr"/>
-        <phase duration="30" state="rrrrrrGGGGGGrrrrrrrrrrrr"/>
+        <phase duration="30" state="rrrrrrGGGGGGrrrrrrrrrrrr" minDur="10" maxDur="50"/>
         <phase duration="4"  state="rrrrrryyyyyyrrrrrrrrrrrr"/>
-        <phase duration="30" state="rrrrrrrrrrrrGGGGGGrrrrrr"/>
+        <phase duration="30" state="rrrrrrrrrrrrGGGGGGrrrrrr" minDur="8" maxDur="50"/>
         <phase duration="4"  state="rrrrrrrrrrrryyyyyyrrrrrr"/>
-        <phase duration="30" state="rrrrrrrrrrrrrrrrrrGGGGGG"/>
+        <phase duration="30" state="rrrrrrrrrrrrrrrrrrGGGGGG" minDur="10" maxDur="50"/>
         <phase duration="4"  state="rrrrrrrrrrrrrrrrrryyyyyy"/>
+        <param key="281221761#1_0" value="e0"/>
+        <param key="281221761#1_1" value="e1"/>
+        <param key="281221761#1_2" value="e2"/>
+        <param key="480041825#9_0" value="w0"/>
+        <param key="480041825#9_1" value="w1"/>
+        <param key="480041825#9_2" value="w2"/>
+        <param key="480155244#5_0" value="n0"/>
+        <param key="480155244#5_1" value="n1"/>
+        <param key="480155244#5_2" value="n2"/>
+        <param key="64661021#4_0" value="s0"/>
+        <param key="64661021#4_1" value="s1"/>
+        <param key="64661021#4_2" value="s2"/>
     </tlLogic>
 
     <junction id="11578115082" type="dead_end" x="1930.99" y="2403.83" incLanes="" intLanes="" shape="1935.65,2404.97 1926.33,2402.69"/>

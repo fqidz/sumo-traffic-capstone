@@ -45,7 +45,7 @@ use_gui = ask_user("Use GUI? (y/N) ")
 
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
-                      out_csv_name='./output/traffic-stats/traffic-sim',
+                      out_csv_name='./output/traffic-stats/traffic-sim-model1',
                       reward_fn=my_reward_fn,
                       delta_time=delta_time,
                       yellow_time=4,

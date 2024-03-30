@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2024-03-29 20:27:23 by Eclipse SUMO netedit Version v1_19_0+1552-1b122d1d49e
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <!-- Detectors -->
+    <inductionLoop id="e0" lane="281221761#1_0" pos="24.53" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="e1" lane="281221761#1_1" pos="24.53" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="e2" lane="281221761#1_2" pos="24.53" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="n0" lane="480155244#5_0" pos="40.72" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="n1" lane="480155244#5_1" pos="40.72" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="n2" lane="480155244#5_2" pos="40.72" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="s0" lane="64661021#4_0" pos="26.80" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="s1" lane="64661021#4_1" pos="26.80" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="s2" lane="64661021#4_2" pos="26.80" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="w0" lane="480041825#9_0" pos="103.71" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="w1" lane="480041825#9_1" pos="103.71" file=".out.xml" friendlyPos="1"/>
+    <inductionLoop id="w2" lane="480041825#9_2" pos="103.71" file=".out.xml" friendlyPos="1"/>
+</additional>

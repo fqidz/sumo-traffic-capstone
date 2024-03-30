@@ -1,5 +1,7 @@
 from os.path import isfile, join
 import os
+from pathlib import Path
+from sys import prefix
 from typing import Union
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +10,7 @@ import csv
 
 
 class DataProcessing():
-    def __init__(self, headers: list[str], input_path: str, output_path: str, output_file_names: list[str], trim_direction: list[str], trim: list[int]) -> None:
+    def __init__(self, headers: list[str], input_path: str, output_path: str, output_file_names: list[str], trim_direction: list[str], trim: list[int], prefix: str = 'traffic-sim_conn0_ep') -> None:
         """
         Args:
             data (dict): the data
@@ -25,6 +27,7 @@ class DataProcessing():
         self.trim_direction = trim_direction
         self.data_dicts = []
         self.do_save = False
+        self.prefix = prefix
 
     def extract_info(self) -> list[dict]:
 
@@ -42,7 +45,7 @@ class DataProcessing():
                     file_name = os.path.split(file_path)[1]
                     # extract the number from the file
                     file_number = int(file_name.removeprefix(
-                        'traffic-sim_conn0_ep').removesuffix('.csv'))
+                        self.prefix).removesuffix('.csv'))
                     # get the index of the header we're looking for
                     header_index = data[0].index(header)
 
@@ -171,6 +174,7 @@ class DataProcessing():
             self.save_to_csv()
         else:
             self.data_dicts = self.load_csv()
+        print(self.data_dicts)
 
         self.plot(self.data_dicts)
 
@@ -183,5 +187,17 @@ process = DataProcessing(
     ['up', 'down'],
     [320000, 6]
 )
+
+# Path('/home/faidz-arante/Documents/sumo-traffic-capstone/output/actuated/processed_data/').mkdir(parents=True, exist_ok=True)
+#
+# process = DataProcessing(
+#     ['0_queue_length', 'system_mean_speed'],
+#     '/home/faidz-arante/Documents/sumo-traffic-capstone/output/actuated/traffic-stats/',
+#     '/home/faidz-arante/Documents/sumo-traffic-capstone/output/actuated/processed_data/',
+#     ['queue_length.csv', 'mean_speeds.csv'],
+#     ['up', 'down'],
+#     [320000, 6],
+#     prefix='actuated_actuated'
+# )
 
 process.run()
