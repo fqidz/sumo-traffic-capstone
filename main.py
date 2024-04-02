@@ -51,7 +51,7 @@ def my_reward_fn(traffic_signal):
     speed = traffic_signal.get_average_speed() * 10
     queue = -np.average(traffic_signal.get_total_queued())
 
-    print(f'reward: {speed + queue}')
+    # print(f'reward: {speed + queue}')
 
     return speed + queue
 
