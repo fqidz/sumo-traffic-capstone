@@ -38,6 +38,7 @@ class TrafficSignal:
     Action space is discrete, corresponding to which green phase is going to be open for the next delta_time seconds.
 
     # Reward Function
+
     The default reward function is 'diff-waiting-time'. You can change the reward function by implementing a custom reward function and passing to the constructor of :py:class:`sumo_rl.environment.env.SumoEnvironment`.
     """
 
@@ -103,6 +104,16 @@ class TrafficSignal:
         extra_lanes = ['64661021#3_0', '64661021#3_1', '480041825#7_0', '480041825#7_1', '480041825#7_2',
                        '480155244#4_0', '480155244#4_1', '480155244#4_2', '484449878#6_0', '484449878#6_1']
         self.lanes.extend(extra_lanes)
+        self.lanes_dir: list[list[str]] = [
+            ['281221761#1_0', '484449878#6_0', '281221761#1_1',
+                '281221761#1_2', '484449878#6_1'],
+            ['480155244#5_2', '480155244#4_2', '480155244#5_1',
+                '480155244#4_1', '480155244#5_0', '480155244#4_0'],
+            ['64661021#4_0', '64661021#3_0', '64661021#4_1',
+                '64661021#3_1', '64661021#4_2'],
+            ['480041825#9_2', '480041825#7_2', '480041825#9_1',
+                '480041825#7_1', '480041825#9_0', '480041825#7_0'],
+        ]
 
         self.out_lanes = [
             link[0][1] for link in self.sumo.trafficlight.getControlledLinks(self.id) if link]
@@ -253,11 +264,13 @@ class TrafficSignal:
 
     def get_average_speed(self) -> float:
         """Returns the average speed normalized by the maximum allowed speed of the vehicles in the intersection.
+        Only measure the speed of non-stopped vehicles
 
         Obs: If there are no vehicles in the intersection, it returns 1.0.
         """
         avg_speed = 0.0
-        vehs = self._get_veh_list()
+        vehs = [v for v in self._get_veh_list(
+        ) if self.sumo.vehicle.getSpeed(v) > 1.0]
         if len(vehs) == 0:
             return 1.0
         for v in vehs:
@@ -291,6 +304,18 @@ class TrafficSignal:
             for lane in self.lanes
         ]
         return [min(1, density) for density in lanes_density]
+
+    def get_lanes_dir_density(self) -> List[float]:
+        lanes_dir = self.lanes_dir
+        veh_count_per_lane = []
+        for direction in lanes_dir:
+            lane_dir_count = [
+                self.sumo.lane.getLastStepVehicleNumber(x) for x in direction]
+            veh_count_per_lane.append(np.sum(lane_dir_count))
+        veh_count_per_lane = list(
+            np.divide(veh_count_per_lane, [60, 66, 42, 82]))
+
+        return veh_count_per_lane
 
     def get_lanes_queue(self) -> List[float]:
         """Returns the queue [0,1] of the vehicles in the incoming lanes of the intersection.

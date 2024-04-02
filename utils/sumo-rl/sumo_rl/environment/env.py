@@ -400,6 +400,7 @@ class SumoEnvironment(gym.Env):
 
     def observation_spaces(self, ts_id: str):
         """Return the observation space of a traffic signal."""
+        print(self.traffic_signals[ts_id].observation_space)
         return self.traffic_signals[ts_id].observation_space
 
     def action_spaces(self, ts_id: str) -> gym.spaces.Discrete:

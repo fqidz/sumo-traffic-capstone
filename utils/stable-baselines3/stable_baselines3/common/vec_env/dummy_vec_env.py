@@ -43,10 +43,12 @@ class DummyVecEnv(VecEnv):
         obs_space = env.observation_space
         self.keys, shapes, dtypes = obs_space_info(obs_space)
 
-        self.buf_obs = OrderedDict([(k, np.zeros((self.num_envs, *tuple(shapes[k])), dtype=dtypes[k])) for k in self.keys])
+        self.buf_obs = OrderedDict([(k, np.zeros(
+            (self.num_envs, *tuple(shapes[k])), dtype=dtypes[k])) for k in self.keys])
         self.buf_dones = np.zeros((self.num_envs,), dtype=bool)
         self.buf_rews = np.zeros((self.num_envs,), dtype=np.float32)
-        self.buf_infos: List[Dict[str, Any]] = [{} for _ in range(self.num_envs)]
+        self.buf_infos: List[Dict[str, Any]] = [{}
+                                                for _ in range(self.num_envs)]
         self.metadata = env.metadata
 
     def step_async(self, actions: np.ndarray) -> None:
@@ -73,8 +75,10 @@ class DummyVecEnv(VecEnv):
 
     def reset(self) -> VecEnvObs:
         for env_idx in range(self.num_envs):
-            maybe_options = {"options": self._options[env_idx]} if self._options[env_idx] else {}
-            obs, self.reset_infos[env_idx] = self.envs[env_idx].reset(seed=self._seeds[env_idx], **maybe_options)
+            maybe_options = {
+                "options": self._options[env_idx]} if self._options[env_idx] else {}
+            obs, self.reset_infos[env_idx] = self.envs[env_idx].reset(
+                seed=self._seeds[env_idx], **maybe_options)
             self._save_obs(env_idx, obs)
         # Seeds and options are only used once
         self._reset_seeds()
@@ -88,7 +92,8 @@ class DummyVecEnv(VecEnv):
     def get_images(self) -> Sequence[Optional[np.ndarray]]:
         if self.render_mode != "rgb_array":
             warnings.warn(
-                f"The render mode is {self.render_mode}, but this method assumes it is `rgb_array` to obtain images."
+                f"The render mode is {
+                    self.render_mode}, but this method assumes it is `rgb_array` to obtain images."
             )
             return [None for _ in self.envs]
         return [env.render() for env in self.envs]  # type: ignore[misc]
@@ -107,7 +112,8 @@ class DummyVecEnv(VecEnv):
             if key is None:
                 self.buf_obs[key][env_idx] = obs
             else:
-                self.buf_obs[key][env_idx] = obs[key]  # type: ignore[call-overload]
+                # type: ignore[call-overload]
+                self.buf_obs[key][env_idx] = obs[key]
 
     def _obs_from_buf(self) -> VecEnvObs:
         return dict_to_obs(self.observation_space, copy_obs_dict(self.buf_obs))
