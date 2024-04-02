@@ -16,10 +16,12 @@ class ObservationFunction:
 
     @abstractmethod
     def __call__(self):
+        """Subclasses must override this method."""
         pass
 
     @abstractmethod
     def observation_space(self):
+        """Subclasses must override this method."""
         pass
 
 
@@ -37,10 +39,9 @@ class DefaultObservationFunction(ObservationFunction):
         min_green = [0 if self.ts.time_since_last_phase_change <
                      self.ts.min_green + self.ts.yellow_time else 1]
         density = self.ts.get_lanes_density()
-        queue = self.ts.get_lanes_queue()
+        queue = self.ts.get_lanes_dir_queue()
         observation = np.array(phase_id + min_green +
                                density + queue, dtype=np.float32)
-        print(observation)
         return observation
 
     def observation_space(self) -> spaces.Box:

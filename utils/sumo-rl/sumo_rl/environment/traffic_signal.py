@@ -317,6 +317,18 @@ class TrafficSignal:
 
         return veh_count_per_lane
 
+    def get_lanes_dir_queue(self) -> List[float]:
+        lanes_dir = self.lanes_dir
+        veh_count_per_lane = []
+        for direction in lanes_dir:
+            lane_dir_count = [
+                self.sumo.lane.getLastStepHaltingNumber(x) for x in direction]
+            veh_count_per_lane.append(np.sum(lane_dir_count))
+        veh_count_per_lane = list(
+            np.divide(veh_count_per_lane, [60, 66, 42, 82]))
+
+        return veh_count_per_lane
+
     def get_lanes_queue(self) -> List[float]:
         """Returns the queue [0,1] of the vehicles in the incoming lanes of the intersection.
 

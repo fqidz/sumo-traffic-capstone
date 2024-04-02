@@ -20,7 +20,7 @@ episodes = 70
 class MyObservationFunction(ObservationFunction):
 
     def __init__(self, ts: TrafficSignal):
-        self.ts = ts
+        super().__init__(ts)
 
     def __call__(self):
         phase_id = [1 if self.ts.green_phase == i else 0 for i in range(
@@ -31,6 +31,10 @@ class MyObservationFunction(ObservationFunction):
         queue = self.ts.get_lanes_queue()
         observation = np.array(phase_id + min_green +
                                density + queue, dtype=np.float32)
+        print(self.ts.get_lanes_dir_density())
+        print("")
+        print(observation)
+        print("")
         return observation
 
     def observation_space(self):
