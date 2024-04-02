@@ -68,7 +68,8 @@ def get_average_speed(veh_list) -> float:
 
 metrics = []
 
-sumo_cmd = ['sumo-gui', '-c', './sumo-things/actuated/main.sumocfg']
+sumo_cmd = ['sumo-gui', '-c',
+            './sumo-things/actuated/main.sumocfg', '--time-to-teleport', '-1']
 traci.start(sumo_cmd)
 
 lanes = list(
@@ -79,14 +80,35 @@ lanes = list(
 extra_lanes = ['64661021#3_0', '64661021#3_1', '480041825#7_0', '480041825#7_1', '480041825#7_2',
                '480155244#4_0', '480155244#4_1', '480155244#4_2', '484449878#6_0', '484449878#6_1']
 lanes.extend(extra_lanes)
+lanes_dir: list[list[str]] = [
+    ['281221761#1_0', '484449878#6_0', '281221761#1_1',
+        '281221761#1_2', '484449878#6_1'],
+    ['480155244#5_2', '480155244#4_2', '480155244#5_1',
+        '480155244#4_1', '480155244#5_0', '480155244#4_0'],
+    ['64661021#4_0', '64661021#3_0', '64661021#4_1',
+        '64661021#3_1', '64661021#4_2'],
+    ['480041825#9_2', '480041825#7_2', '480041825#9_1',
+        '480041825#7_1', '480041825#9_0', '480041825#7_0'],
+]
+
 
 for _ in range(num_seconds):
     traci.simulationStep()
+    traci.trafficlight.setRedYellowGreenState('0', "rrrrrrrrrrrrrrrrrrrrrrrr")
     vehs = traci.vehicle.getIDList()
     info = {"step": traci.simulation.getTime()}
     all_info = _get_per_agent_info(vehs, lanes)
     info.update(all_info)
     metrics.append(info.copy())
+
+    veh_count_per_lane = []
+    for direction in lanes_dir:
+        lane_dir_count = [
+            traci.lane.getLastStepVehicleNumber(x) for x in direction]
+        veh_count_per_lane.append(np.sum(lane_dir_count))
+    print(veh_count_per_lane)
+    veh_count_per_lane = np.divide(veh_count_per_lane, [60, 66, 42, 82])
+    print(veh_count_per_lane)
 
 traci.close()
 
