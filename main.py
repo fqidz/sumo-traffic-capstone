@@ -80,7 +80,7 @@ use_gui = ask_user("Use GUI? (y/N) ")
 
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
-                      out_csv_name='./output/traffic-stats/traffic-sim-model3',
+                      out_csv_name='./output/traffic-stats/traffic-sim-model4',
                       reward_fn=my_reward_fn,
                       delta_time=delta_time,
                       yellow_time=4,
@@ -95,7 +95,7 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
 
 load_model = ask_user("Load model? (y/N) ")
 if load_model:
-    model = DQN.load('./output/models/model1.zip', print_system_info=True)
+    model = DQN.load('./output/models/model3.zip', print_system_info=True)
     model.set_env(env=env)
     model.learn(
         total_timesteps=agent_steps_per_episode * episodes, log_interval=1, callback=None, reset_num_timesteps=False)
