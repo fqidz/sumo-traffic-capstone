@@ -25,7 +25,8 @@ class TrafficSignal:
     # Observation Space
     The default observation for each traffic signal agent is a vector:
 
-    obs = [phase_one_hot, min_green, lane_1_density,...,lane_n_density, lane_1_queue,...,lane_n_queue]
+    obs = [phase_one_hot, min_green, lane_1_density,...,
+        lane_n_density, lane_1_queue,...,lane_n_queue]
 
     - ```phase_one_hot``` is a one-hot encoded vector indicating the current active green phase
     - ```min_green``` is a binary variable indicating whether min_green seconds have already passed in the current phase
@@ -329,6 +330,30 @@ class TrafficSignal:
 
         return veh_count_per_lane
 
+    def get_lanes_speed(self) -> List[float]:
+        lane_speed = []
+        for lane in self.lanes:
+            avg_speed = 0.0
+            vehs = [v for v in self.sumo.lane.getLastStepVehicleIDs(lane)]
+            if len(vehs):
+                for v in vehs:
+                    avg_speed += self.sumo.vehicle.getSpeed(
+                        v) / self.sumo.vehicle.getAllowedSpeed(v)
+                lane_speed.append(avg_speed / len(vehs))
+            else:
+                lane_speed.append(0.0)
+
+        return lane_speed
+
+        # lanes_speed = []
+        # for lane in self.lanes:
+        #     vehicle_info: dict[int, str] = {}
+
+        #     for v in self.sumo.lane.getLastStepVehicleIDs:
+        #         vehicle_info[v] = [self.sumo.vehicles.getSpeed(v), self.sumo.vehicles.getMaxSpeed()
+
+        #     lanes_speed.append(list(np.sum(vehs_speed)))
+
     def get_lanes_queue(self) -> List[float]:
         """Returns the queue [0,1] of the vehicles in the incoming lanes of the intersection.
 
@@ -351,7 +376,7 @@ class TrafficSignal:
             veh_list += self.sumo.lane.getLastStepVehicleIDs(lane)
         return veh_list
 
-    @classmethod
+    @ classmethod
     def register_reward_fn(cls, fn: Callable):
         """Registers a reward function.
 

@@ -27,26 +27,31 @@ class MyObservationFunction(ObservationFunction):
             self.ts.num_green_phases)]  # one-hot encoding
         min_green = [0 if self.ts.time_since_last_phase_change <
                      self.ts.min_green + self.ts.yellow_time else 1]
-        density = self.ts.get_lanes_dir_density()
+        density = self.ts.get_lanes_density()
         queue = self.ts.get_lanes_queue()
+        speed = self.ts.get_lanes_speed()
         observation = np.array(phase_id + min_green +
-                               density + queue, dtype=np.float32)
-        print(self.ts.get_lanes_dir_density())
-        print("")
-        print(observation)
-        print("")
+                               density + queue + speed, dtype=np.float32)
+        # print(f'density: {density}')
+        # print(f'queue: {queue}')
+        # print(f'speed: {speed}')
+        # print(f'observation: {observation}')
         return observation
 
     def observation_space(self):
         return spaces.Box(
-            low=np.zeros(33, dtype=np.float32),
-            high=np.ones(33, dtype=np.float32),
+            low=np.zeros(self.ts.num_green_phases + 1 + 3 *
+                         len(self.ts.lanes), dtype=np.float32),
+            high=np.ones(self.ts.num_green_phases + 1 + 3 *
+                         len(self.ts.lanes), dtype=np.float32),
         )
 
 
 def my_reward_fn(traffic_signal):
-    speed = traffic_signal.get_average_speed() * 2
-    queue = -np.average(traffic_signal.get_total_queued()) * 0.75
+    speed = traffic_signal.get_average_speed() * 10
+    queue = -np.average(traffic_signal.get_total_queued())
+
+    print(f'reward: {speed + queue}')
 
     return speed + queue
 
@@ -75,7 +80,7 @@ use_gui = ask_user("Use GUI? (y/N) ")
 
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file='./sumo-things/main.rou.xml',
-                      out_csv_name='./output/traffic-stats/traffic-sim-model1',
+                      out_csv_name='./output/traffic-stats/traffic-sim-model3',
                       reward_fn=my_reward_fn,
                       delta_time=delta_time,
                       yellow_time=4,
