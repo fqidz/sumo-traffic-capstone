@@ -2,3 +2,4 @@
 .idea/**
 yolov8*
 output/traffic-stats
+object_detection/dataset
