@@ -1,14 +1,25 @@
+import os
 from sumo_rl import SumoEnvironment
 from stable_baselines3.dqn.dqn import DQN
 from pathlib import Path
-import numpy as np
-from gymnasium import spaces
-from sumo_rl.environment.observations import ObservationFunction
-from sumo_rl.environment.traffic_signal import TrafficSignal
+from utils.main_utils import MyObservationFunction, my_reward_fn, ask_user
 
-Path("./output/traffic-stats/").mkdir(parents=True, exist_ok=True)
-Path("./output/logs/").mkdir(parents=True, exist_ok=True)
-Path("./output/models/").mkdir(parents=True, exist_ok=True)
+model_name_path = input('Model Name: ')
+model_name = model_name_path + '.zip'
+
+output_path = './output/'
+models_path = os.path.join(output_path, 'models/')
+traffic_stats_path = os.path.join(
+    output_path, 'traffic-stats/', model_name_path + '/')
+logs_path = os.path.join(output_path, 'logs/', model_name_path + '/')
+
+print(f'models path: {models_path}')
+print(f'traffic stats path: {traffic_stats_path}')
+print(f'logs path: {logs_path}')
+
+Path(models_path).mkdir(parents=True, exist_ok=True)
+Path(traffic_stats_path).mkdir(parents=True, exist_ok=True)
+Path(logs_path).mkdir(parents=True, exist_ok=True)
 
 num_seconds = 43500
 delta_time = 10
@@ -17,69 +28,16 @@ agent_steps_per_episode = -(-num_seconds // delta_time)
 episodes = 70
 
 
-class MyObservationFunction(ObservationFunction):
-
-    def __init__(self, ts: TrafficSignal):
-        super().__init__(ts)
-
-    def __call__(self):
-        phase_id = [1 if self.ts.green_phase == i else 0 for i in range(
-            self.ts.num_green_phases)]  # one-hot encoding
-        min_green = [0 if self.ts.time_since_last_phase_change <
-                     self.ts.min_green + self.ts.yellow_time else 1]
-        density = self.ts.get_lanes_density()
-        queue = self.ts.get_lanes_queue()
-        speed = self.ts.get_lanes_speed()
-        observation = np.array(phase_id + min_green +
-                               density + queue + speed, dtype=np.float32)
-        # print(f'density: {density}')
-        # print(f'queue: {queue}')
-        # print(f'speed: {speed}')
-        # print(f'observation: {observation}')
-        return observation
-
-    def observation_space(self):
-        return spaces.Box(
-            low=np.zeros(self.ts.num_green_phases + 1 + 3 *
-                         len(self.ts.lanes), dtype=np.float32),
-            high=np.ones(self.ts.num_green_phases + 1 + 3 *
-                         len(self.ts.lanes), dtype=np.float32),
-        )
-
-
-def my_reward_fn(traffic_signal):
-    speed = traffic_signal.get_average_speed() * 10
-    queue = -np.average(traffic_signal.get_total_queued())
-
-    # print(f'reward: {speed + queue}')
-
-    return speed + queue
-
-
-def ask_user(prompt: str) -> bool:
-    repeat = True
-    answer = False
-
-    prompt_answer = input(prompt).lower()
-    prompt_answer = "".join(prompt_answer.split())
-
-    while repeat:
-        if prompt_answer == "y":
-            answer = True
-            repeat = False
-        elif prompt_answer == "n" or not prompt_answer:
-            answer = False
-            repeat = False
-        else:
-            repeat = True
-
-    return answer
-
-
 use_gui = ask_user("Use GUI? (y/N) ")
+use_object_detection = ask_user("Object detection mode?")
+
+if use_object_detection:
+    route_file = ''
+else:
+    route_file = './sumo-things/main.rou.xml'
 
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
-                      route_file='./sumo-things/main.rou.xml',
+                      route_file=route_file,
                       out_csv_name='./output/traffic-stats/traffic-sim-model4',
                       reward_fn=my_reward_fn,
                       delta_time=delta_time,
@@ -95,11 +53,15 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
 
 load_model = ask_user("Load model? (y/N) ")
 if load_model:
-    model = DQN.load('./output/models/model3.zip', print_system_info=True)
+    selected_model_path = os.path.join(models_path, model_name)
+    print(f'Running model from: {selected_model_path}')
+
+    model = DQN.load(selected_model_path, print_system_info=True)
     model.set_env(env=env)
     model.learn(
-        total_timesteps=agent_steps_per_episode * episodes, log_interval=1, callback=None, reset_num_timesteps=False)
+        total_timesteps=agent_steps_per_episode * episodes, callback=None, reset_num_timesteps=False)
 else:
+    save_model_name = input("Save model as: ")
     model = DQN(
         env=env,
         policy="MlpPolicy",
@@ -111,10 +73,10 @@ else:
         exploration_fraction=0.05,
         exploration_final_eps=0.01,
         verbose=1,
-        tensorboard_log="./output/logs/"
+        tensorboard_log=logs_path
     )
     model.learn(
         total_timesteps=agent_steps_per_episode * episodes, log_interval=1, callback=None)
-
-model.save("./output/models/model3")
-print("Model saved to ./output/")
+    saved_model_path = os.path.join(models_path, save_model_name)
+    model.save(saved_model_path)
+    print(f"Model saved to {saved_model_path}")
