@@ -201,12 +201,12 @@ Path('/home/faidz-arante/Documents/sumo-traffic-capstone/output/processed_data/m
 
 process = DataProcessing(
     ['0_queue_length', 'system_mean_speed'],
-    '/home/faidz-arante/Documents/sumo-traffic-capstone/output/traffic-stats/',
+    '/home/faidz-arante/Documents/sumo-traffic-capstone/output/traffic-stats/model3/',
     '/home/faidz-arante/Documents/sumo-traffic-capstone/output/processed_data/model3/',
     ['queue_length.csv', 'mean_speeds.csv'],
     ['up', 'down'],
     [320000, 6],
-    prefix='actuated_actuated'
+    prefix='traffic-sim-model3_conn0_ep'
 )
 
 process.run()
