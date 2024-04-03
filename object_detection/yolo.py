@@ -16,7 +16,9 @@ model = YOLO("yolov8m.pt")
 #     tracker="bytetrack.yaml",
 #     classes=[2, 3, 5, 7],
 # )
-cap = cv2.VideoCapture(2)
+
+# cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture("/home/faidz-arante/Videos/2024-04-03_13-55-00.mkv")
 
 
 def get_bounding_boxes(results, frame):
@@ -43,6 +45,7 @@ def get_bounding_boxes(results, frame):
 # def capture_mouse_xy(event, x, y, flags, param):
 #     global mouseX, mouseY
 #     if event == cv2.EVENT_LBUTTONDBLCLK:
+
 #         mouseX, mouseY = x, y
 #
 #
@@ -52,67 +55,49 @@ class Lane:
     def __init__(self, points, color) -> None:
         self.points = points
         self.color = color
-        self.is_car = False
 
 
 while cap.isOpened():
     success, frame = cap.read()
+    frame = cv2.resize(frame, (640, 480))
 
     if success:
         results = model.track(
-            data="./dataset/data.yaml",
+            data="dataset/test2/data.yaml",
             source=frame,
             persist=True,
             conf=0.3,
             save=False,
             tracker="bytetrack.yaml",
-            # classes=[2, 3, 5, 7],
+            classes=[2, 3, 5, 7],
         )
         results_ = results[0].plot()
         lane1 = Lane(
-            np.array([[100, 200],
-                      [200, 200],
-                      [200, 100],
-                      [100, 100]],
+            np.array([[215, 260],
+                      [279, 257],
+                      [304, 326],
+                      [234, 337]],
                      np.int32),
             (0, 0, 255)
         )
         lane2 = Lane(
-            np.array([[300, 400],
-                      [400, 400],
-                      [400, 300],
-                      [300, 300]],
+            np.array([[308, 248],
+                      [370, 246],
+                      [414, 316],
+                      [351, 322]],
                      np.int32),
             (0, 0, 255)
         )
         lane3 = Lane(
-            np.array([[250, 150],
-                      [250, 250],
-                      [150, 250],
-                      [150, 150]],
+            np.array([[420, 241],
+                      [473, 231],
+                      [537, 286],
+                      [468, 302]],
                      np.int32),
             (0, 0, 255)
         )
 
         lanes = [lane1, lane2, lane3]
-
-        # lanes = [
-        #     np.array([[100, 200],
-        #               [200, 200],
-        #               [200, 100],
-        #               [100, 100]],
-        #              np.int32),
-        #     np.array([[300, 400],
-        #               [400, 400],
-        #               [400, 300],
-        #               [300, 300]],
-        #              np.int32),
-        #     np.array([[250, 150],
-        #               [250, 250],
-        #               [150, 250],
-        #               [150, 150]],
-        #              np.int32),
-        # ]
 
         img, boxes = get_bounding_boxes(results, frame)
 

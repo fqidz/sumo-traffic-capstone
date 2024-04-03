@@ -1,8 +1,6 @@
 from os.path import isfile, join
 import os
 from pathlib import Path
-from sys import prefix
-from typing import Union
 import numpy as np
 import matplotlib.pyplot as plt
 import numpy as np
@@ -90,13 +88,15 @@ class DataProcessing():
                             neighbors_mean = (
                                 data[key - 1] + data[key + 1]) / 2
                             data[key] = neighbors_mean
-                            print(f"Episode {key} outlier (value of {value} >= {self.trim[i]}): Adjusted to mean of neighbors ({neighbors_mean})")
+                            print(f"Episode {key} outlier (value of {value} >= {
+                                  self.trim[i]}): Adjusted to mean of neighbors ({neighbors_mean})")
                     elif self.trim_direction[i] == 'down':
                         if (value <= self.trim[i]):
                             neighbors_mean = (
                                 data[key - 1] + data[key + 1]) / 2
                             data[key] = neighbors_mean
-                            print(f"Episode {key} outlier (value of {value} <= {self.trim[i]}): Adjusted to mean of neighbors ({neighbors_mean})")
+                            print(f"Episode {key} outlier (value of {value} <= {
+                                  self.trim[i]}): Adjusted to mean of neighbors ({neighbors_mean})")
                     else:
                         raise Exception(
                             "trim_direction can only be 'up' or 'down'")
@@ -109,7 +109,8 @@ class DataProcessing():
 
                 writer.writerow(list(data.keys()))
                 writer.writerow(list(data.values()))
-            print(f"Saved {self.headers[i]} to {os.path.join(self.output_path, self.output_file_names[i])}")
+            print(f"Saved {self.headers[i]} to {os.path.join(
+                self.output_path, self.output_file_names[i])}")
 
     def load_csv(self) -> list[dict]:
         loaded_data = []
@@ -186,26 +187,26 @@ class DataProcessing():
 #     "traffic-sim-model3_conn0_ep"
 # )
 
-process = DataProcessing(
-    ['0_queue_length', 'system_mean_speed'],
-    '/home/faidz/sumo-traffic-capstone/output/traffic-stats/',
-    '/home/faidz/sumo-traffic-capstone/output/processed_data/model3/',
-    ['queue_length.csv', 'mean_speeds.csv'],
-    ['up', 'down'],
-    [320000, 6],
-    "traffic-sim-model3_conn0_ep"
-)
-
-# Path('/home/faidz-arante/Documents/sumo-traffic-capstone/output/actuated/processed_data/').mkdir(parents=True, exist_ok=True)
-#
 # process = DataProcessing(
 #     ['0_queue_length', 'system_mean_speed'],
-#     '/home/faidz-arante/Documents/sumo-traffic-capstone/output/actuated/traffic-stats/',
-#     '/home/faidz-arante/Documents/sumo-traffic-capstone/output/actuated/processed_data/',
+#     '/home/faidz/sumo-traffic-capstone/output/traffic-stats/',
+#     '/home/faidz/sumo-traffic-capstone/output/processed_data/model3/',
 #     ['queue_length.csv', 'mean_speeds.csv'],
 #     ['up', 'down'],
 #     [320000, 6],
-#     prefix='actuated_actuated'
+#     "traffic-sim-model3_conn0_ep"
 # )
+
+Path('/home/faidz-arante/Documents/sumo-traffic-capstone/output/processed_data/model3/').mkdir(parents=True, exist_ok=True)
+
+process = DataProcessing(
+    ['0_queue_length', 'system_mean_speed'],
+    '/home/faidz-arante/Documents/sumo-traffic-capstone/output/traffic-stats/',
+    '/home/faidz-arante/Documents/sumo-traffic-capstone/output/processed_data/model3/',
+    ['queue_length.csv', 'mean_speeds.csv'],
+    ['up', 'down'],
+    [320000, 6],
+    prefix='actuated_actuated'
+)
 
 process.run()
