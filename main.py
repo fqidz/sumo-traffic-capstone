@@ -5,6 +5,10 @@ from pathlib import Path
 from utils.main_utils import MyObservationFunction, my_reward_fn, ask_user
 
 model_name_path = input('Model Name: ')
+use_gui = ask_user("Use GUI? (y/N) ")
+use_object_detection = ask_user("Object detection mode? (y/N) ")
+load_model = ask_user("Load model? (y/N) ")
+
 model_name = model_name_path + '.zip'
 
 output_path = './output/'
@@ -28,13 +32,12 @@ agent_steps_per_episode = -(-num_seconds // delta_time)
 episodes = 70
 
 
-use_gui = ask_user("Use GUI? (y/N) ")
-use_object_detection = ask_user("Object detection mode?")
-
 if use_object_detection:
     route_file = './sumo-things/only_routes.rou.xml'
+    object_detection = True
 else:
     route_file = './sumo-things/main.rou.xml'
+    object_detection = False
 
 routes = [
     "e_to_e", "e_to_n",
@@ -65,11 +68,11 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       use_gui=use_gui,
                       single_agent=True,
                       num_seconds=num_seconds,
-                      observation_class=MyObservationFunction
+                      observation_class=MyObservationFunction,
+                      object_detection=object_detection
                       )
 
 
-load_model = ask_user("Load model? (y/N) ")
 if load_model:
     selected_model_path = os.path.join(models_path, model_name)
     print(f'Running model from: {selected_model_path}')
@@ -78,6 +81,7 @@ if load_model:
     model.set_env(env=env)
     model.learn(
         total_timesteps=agent_steps_per_episode * episodes, callback=None, reset_num_timesteps=False)
+
 else:
     save_model_name = input("Save model as: ")
     model = DQN(

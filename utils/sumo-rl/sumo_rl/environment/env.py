@@ -6,6 +6,12 @@ from typing import Callable, Iterable, Optional, Tuple, Union
 import uuid
 import random as rand
 
+from ultralytics import YOLO
+import numpy as np
+from shapely import box, intersects, Polygon
+import cv2
+from ultralytics.utils.plotting import Annotator
+
 
 if "SUMO_HOME" in os.environ:
     tools = os.path.join(os.environ["SUMO_HOME"], "tools")
@@ -38,6 +44,28 @@ def env(**kwargs):
 
 
 parallel_env = parallel_wrapper_fn(env)
+
+
+class Lane:
+    def __init__(self, points, color, car_x, car_y) -> None:
+        self.points = points
+        self.color = color
+        self.car_x = car_x
+        self.car_y = car_y
+        self.car_detected = False
+        self.lane_poly = Polygon(self.points)
+        self.car = uuid.uuid4()
+
+    def check_if_car(self, boxes):
+        is_car = False
+        if len(boxes) == 0:
+            return False
+
+        for _box in boxes:
+            if intersects(self.lane_poly, _box):
+                is_car = True
+
+        return is_car
 
 
 class SumoEnvironment(gym.Env):
@@ -108,6 +136,7 @@ class SumoEnvironment(gym.Env):
         sumo_warnings: bool = True,
         additional_sumo_cmd: Optional[str] = None,
         render_mode: Optional[str] = None,
+        object_detection=False,
     ) -> None:
         """Initialize the environment."""
         assert render_mode is None or render_mode in self.metadata[
@@ -149,6 +178,66 @@ class SumoEnvironment(gym.Env):
         self.label = str(SumoEnvironment.CONNECTION_LABEL)
         SumoEnvironment.CONNECTION_LABEL += 1
         self.sumo = None
+
+        self.object_detection = object_detection
+
+        self.lane1_1 = Lane(
+            np.array([[165, 367],
+                      [181, 370],
+                      [189, 334],
+                      [161, 333]],
+                     np.int32),
+            (0, 0, 255),
+            1980.23, 2149.55
+        )
+        self.lane2_1 = Lane(
+            np.array([[230, 379],
+                      [254, 380],
+                      [259, 347],
+                      [235, 346]],
+                     np.int32),
+            (0, 0, 255),
+            1979.07, 2153.05
+        )
+        self.lane3_1 = Lane(
+            np.array([[308, 391],
+                      [333, 395],
+                      [334, 355],
+                      [312, 355]],
+                     np.int32),
+            (0, 0, 255),
+            1978.11, 2156.23
+        )
+        self.lane1_2 = Lane(
+            np.array([[190, 224],
+                      [210, 224],
+                      [214, 201],
+                      [191, 196]],
+                     np.int32),
+            (0, 0, 255),
+            1971.67, 2147.28
+        )
+        self.lane2_2 = Lane(
+            np.array([[247, 224],
+                      [266, 226],
+                      [267, 204],
+                      [248, 201]],
+                     np.int32),
+            (0, 0, 255),
+            1969.87, 2150.57
+        )
+        self.lane3_2 = Lane(
+            np.array([[307, 221],
+                      [328, 219],
+                      [328, 202],
+                      [311, 200]],
+                     np.int32),
+            (0, 0, 255),
+            1969.12, 2153.64
+        )
+
+        self.lanes_obj = [self.lane1_1, self.lane2_1,
+                          self.lane3_1, self.lane1_2, self.lane2_2, self.lane3_2]
 
         if LIBSUMO:
             # Start only to retrieve traffic light information
@@ -203,7 +292,91 @@ class SumoEnvironment(gym.Env):
         self.observations = {ts: None for ts in self.ts_ids}
         self.rewards = {ts: None for ts in self.ts_ids}
 
+        self.model = YOLO("yolov8m.pt")
+        # self.cap = cv2.VideoCapture(
+        #     "/home/faidz-arante/Videos/2024-04-03_13-55-00.mkv")
+        self.cap = cv2.VideoCapture(
+            "/home/faidz-arante/Videos/real_car_test.mp4")
+
+    def object_detection_step(self):
+        if not self.cap.isOpened():
+            # self.cap.open("/home/faidz-arante/Videos/2024-04-03_13-55-00.mkv")
+            self.cap.open("/home/faidz-arante/Videos/real_car_test.mp4")
+
+        self.success, self.frame = self.cap.read()
+
+        if self.success:
+            self.frame = cv2.resize(self.frame, (640, 480))
+            results = self.model.track(
+                data="dataset/test2/data.yaml",
+                source=self.frame,
+                persist=True,
+                conf=0.2,
+                save=False,
+                tracker="bytetrack.yaml",
+                classes=[2, 3, 5, 7],
+                verbose=False,
+            )
+            results_ = results[0].plot()
+
+            img, boxes = self.get_bounding_boxes(results, self.frame)
+            boxes_poly = []
+            for _box in boxes:
+                _box = _box.tolist()
+                boxes_poly.append(box(_box[0], _box[1], _box[2], _box[3]))
+
+            for lane in self.lanes_obj:
+                if lane.check_if_car(boxes_poly):
+                    lane.color = (0, 255, 0)
+
+                    self.sumo.vehicle.moveToXY(
+                        lane.car, "0", "0", lane.car_x, lane.car_y, keepRoute=2)
+                    self.sumo.vehicle.setSpeed(lane.car, 2)
+
+                else:
+                    lane.color = (0, 0, 255)
+
+                    self.sumo.vehicle.moveToXY(
+                        lane.car, "0", "0", 2037.98, 1983.97, keepRoute=2)
+                    self.sumo.vehicle.setSpeed(lane.car, 2)
+
+            # for i in boxes:
+            #     coord = i.tolist()
+            #     bounding_box = box(coord[0], coord[1], coord[2], coord[3])
+            #     for lane in self.lanes_obj:
+            #         if intersects(bounding_box, lane.lane_poly):
+            #             lane.color = (0, 255, 0)
+            #             self.sumo.vehicle.moveToXY(
+            #                 lane.car, "0", "0", lane.car_x, lane.car_y, keepRoute=2)
+            #             self.sumo.vehicle.setSpeed(lane.car, 0)
+            #             print(f'lane {lane.points} has car')
+            #             continue
+            #         else:
+            #             lane.color = (0, 0, 255)
+            #             self.sumo.vehicle.moveToXY(
+            #                 lane.car, "0", "0", 2037.98, 1983.97, keepRoute=2)
+            #             self.sumo.vehicle.setSpeed(lane.car, 0)
+            #             print(f'lane {lane.points} DOESNT HAVE A CAR')
+
+            for lane in self.lanes_obj:
+                results_ = cv2.polylines(
+                    results_, [lane.points], True, lane.color, 2)
+
+            cv2.imshow('car', results_)
+            cv2.waitKey(20)
+
+            # k = cv2.waitKey(20) & 0xFF
+            # if k == ord('q'):
+            #     break
+
+    def release_cap(self):
+        self.cap.release()
+        cv2.destroyAllWindows()
+
     def _start_simulation(self):
+        if self.object_detection:
+            self.release_cap()
+
         sumo_cmd = [
             self._sumo_binary,
             "-n",
@@ -252,9 +425,36 @@ class SumoEnvironment(gym.Env):
                 traci.gui.DEFAULT_VIEW = "View #0"
             self.sumo.gui.setSchema(traci.gui.DEFAULT_VIEW, "real world")
 
+        if self.object_detection:
+            for lane in self.lanes_obj:
+                car_id = self.spawn_car()
+                lane.car = car_id
+
+    def get_bounding_boxes(self, results, frame):
+        annotator = Annotator(frame)
+        bounding_boxes = []
+        for r in results:
+            boxes = r.boxes
+
+            for box in boxes:
+                # get box coordinates in (left, top, right, bottom) format
+                b = box.xyxy[0]
+                c = box.cls
+                if box.id:
+                    i = box.id.item()
+                else:
+                    i = None
+
+                annotator.box_label(b, f'{self.model.names[int(c)]} id: {i}')
+                bounding_boxes.append(b)
+
+        return annotator.result(), bounding_boxes
+
     def reset(self, seed: Optional[int] = None, **kwargs):
         """Reset the environment."""
         super().reset(seed=seed, **kwargs)
+        if self.object_detection:
+            self.release_cap()
 
         if self.episode != 0:
             self.close()
@@ -331,7 +531,7 @@ class SumoEnvironment(gym.Env):
         truncated = dones["__all__"]  # episode ends when sim_step >= max_steps
         info = self._compute_info()
 
-        self.spawn_car()
+        # self.spawn_car()
 
         if self.single_agent:
             return observations[self.ts_ids[0]], rewards[self.ts_ids[0]], terminated, truncated, info
@@ -416,10 +616,15 @@ class SumoEnvironment(gym.Env):
         return self.traffic_signals[ts_id].action_space
 
     def spawn_car(self):
-        self.sumo.vehicle.add(uuid.uuid4(), rand.choice(
-            self.routes), rand.choice(self.vehicle_types))
+        car_id = uuid.uuid4()
+        self.sumo.vehicle.add(car_id, rand.choice(
+            self.routes), "PASSENGER")
+
+        return car_id
 
     def _sumo_step(self):
+        if self.object_detection:
+            self.object_detection_step()
         self.sumo.simulationStep()
 
     def _get_system_info(self):

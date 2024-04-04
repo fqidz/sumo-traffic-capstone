@@ -6,20 +6,7 @@ from ultralytics.utils.plotting import Annotator
 
 
 model = YOLO("yolov8m.pt")
-# results = model.track(
-#     data="./dataset/data.yaml",
-#     source="2",
-#     show=True,
-#     persist=True,
-#     conf=0.3,
-#     save=False,
-#     tracker="bytetrack.yaml",
-#     classes=[2, 3, 5, 7],
-# )
-
-# cap = cv2.VideoCapture(2)
 cap = cv2.VideoCapture("/home/faidz-arante/Videos/2024-04-03_13-55-00.mkv")
-
 
 def get_bounding_boxes(results, frame):
     annotator = Annotator(frame)

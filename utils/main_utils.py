@@ -19,10 +19,10 @@ class MyObservationFunction(ObservationFunction):
         speed = self.ts.get_lanes_speed()
         observation = np.array(phase_id + min_green +
                                density + queue + speed, dtype=np.float32)
-        # print(f'density: {density}')
-        # print(f'queue: {queue}')
-        # print(f'speed: {speed}')
-        # print(f'observation: {observation}')
+        print(f'lanes density: {np.array(density)}')
+        print(f'queue length: {np.array(queue)}')
+        print(f'vehicle speed: {np.array(speed)}')
+        print('')
         return observation
 
     def observation_space(self):
