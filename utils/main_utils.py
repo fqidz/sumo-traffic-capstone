@@ -1,6 +1,3 @@
-from sumo_rl import SumoEnvironment
-from stable_baselines3.dqn.dqn import DQN
-from pathlib import Path
 import numpy as np
 from gymnasium import spaces
 from sumo_rl.environment.observations import ObservationFunction

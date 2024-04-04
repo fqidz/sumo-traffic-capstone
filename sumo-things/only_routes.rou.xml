@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2024-03-27 23:24:45 by Eclipse SUMO netedit Version v1_19_0+1552-1b122d1d49e
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <!-- VTypes -->
+    <vType id="BUS" vClass="bus" carFollowModel="EIDM"/>
+    <vType id="PASSENGER" carFollowModel="EIDM"/>
+    <vType id="TRUCK" vClass="truck" carFollowModel="EIDM"/>
+    <!-- Routes -->
+    <route id="e_to_e" edges="484449878#6 281221761#1 4811637#0 4811637#1" color="green"/>
+    <route id="e_to_n" edges="484449878#6 617083445 281221762#1" color="green"/>
+    <route id="e_to_s" edges="484449878#6 281221761#1 281226915#1 281226915#2" color="green"/>
+    <route id="e_to_w" edges="484449878#6 281221761#1 281221763#0 281221763#1" color="green"/>
+    <route id="n_to_e" edges="480155244#4 480155244#5 4811637#0 4811637#1" color="cyan"/>
+    <route id="n_to_n" edges="480155244#4 480155244#5 281221762#0 281221762#1" color="cyan"/>
+    <route id="n_to_s" edges="480155244#4 480155244#5 281226915#1 281226915#2" color="cyan"/>
+    <route id="n_to_w" edges="480155244#4 617083443 281221763#1" color="cyan"/>
+    <route id="s_to_e" edges="64661021#3 4811639 4811637#1" color="blue"/>
+    <route id="s_to_n" edges="64661021#3 64661021#4 281221762#0 281221762#1" color="blue"/>
+    <route id="s_to_s" edges="64661021#3 64661021#4 281226915#1 281226915#2" color="blue"/>
+    <route id="s_to_w" edges="64661021#3 64661021#4 281221763#0" color="blue"/>
+    <route id="w_to_e" edges="480041825#7 480041825#9 4811637#0 4811637#1" color="red"/>
+    <route id="w_to_n" edges="480041825#7 480041825#9 281221762#0 281221762#1" color="red"/>
+    <route id="w_to_s" edges="480041825#7 4811642 281226915#2" color="red"/>
+    <route id="w_to_w" edges="480041825#7 480041825#9 281221763#0 281221763#1" color="red"/>
+</routes>

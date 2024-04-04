@@ -32,12 +32,30 @@ use_gui = ask_user("Use GUI? (y/N) ")
 use_object_detection = ask_user("Object detection mode?")
 
 if use_object_detection:
-    route_file = ''
+    route_file = './sumo-things/only_routes.rou.xml'
 else:
     route_file = './sumo-things/main.rou.xml'
 
+routes = [
+    "e_to_e", "e_to_n",
+    "e_to_s", "e_to_w",
+    "n_to_e", "n_to_n",
+    "n_to_s", "n_to_w",
+    "s_to_e", "s_to_n",
+    "s_to_s", "s_to_w",
+    "w_to_e", "w_to_n",
+    "w_to_s", "w_to_w",
+]
+vehicle_types = [
+    "BUS",
+    "TRUCK",
+    "PASSENGER",
+]
+
 env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       route_file=route_file,
+                      routes=routes,
+                      vehicle_types=vehicle_types,
                       out_csv_name='./output/traffic-stats/traffic-sim-model4',
                       reward_fn=my_reward_fn,
                       delta_time=delta_time,

@@ -2,7 +2,9 @@
 import os
 import sys
 from pathlib import Path
-from typing import Callable, Optional, Tuple, Union
+from typing import Callable, Iterable, Optional, Tuple, Union
+import uuid
+import random as rand
 
 
 if "SUMO_HOME" in os.environ:
@@ -82,6 +84,8 @@ class SumoEnvironment(gym.Env):
         self,
         net_file: str,
         route_file: str,
+        routes: Iterable[str],
+        vehicle_types: Iterable[str],
         out_csv_name: Optional[str] = None,
         use_gui: bool = False,
         virtual_display: Tuple[int, int] = (3200, 1800),
@@ -114,6 +118,8 @@ class SumoEnvironment(gym.Env):
 
         self._net = net_file
         self._route = route_file
+        self.routes = routes
+        self.vehicle_types = vehicle_types
         self.use_gui = use_gui
         if self.use_gui or self.render_mode is not None:
             self._sumo_binary = sumolib.checkBinary("sumo-gui")
@@ -325,6 +331,8 @@ class SumoEnvironment(gym.Env):
         truncated = dones["__all__"]  # episode ends when sim_step >= max_steps
         info = self._compute_info()
 
+        self.spawn_car()
+
         if self.single_agent:
             return observations[self.ts_ids[0]], rewards[self.ts_ids[0]], terminated, truncated, info
         else:
@@ -406,6 +414,10 @@ class SumoEnvironment(gym.Env):
     def action_spaces(self, ts_id: str) -> gym.spaces.Discrete:
         """Return the action space of a traffic signal."""
         return self.traffic_signals[ts_id].action_space
+
+    def spawn_car(self):
+        self.sumo.vehicle.add(uuid.uuid4(), rand.choice(
+            self.routes), rand.choice(self.vehicle_types))
 
     def _sumo_step(self):
         self.sumo.simulationStep()
