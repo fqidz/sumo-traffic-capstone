@@ -137,6 +137,7 @@ class SumoEnvironment(gym.Env):
         additional_sumo_cmd: Optional[str] = None,
         render_mode: Optional[str] = None,
         object_detection=False,
+        use_cam=False,
     ) -> None:
         """Initialize the environment."""
         assert render_mode is None or render_mode in self.metadata[
@@ -180,57 +181,58 @@ class SumoEnvironment(gym.Env):
         self.sumo = None
 
         self.object_detection = object_detection
+        self.use_cam = use_cam
 
         self.lane1_1 = Lane(
-            np.array([[165, 367],
-                      [181, 370],
-                      [189, 334],
-                      [161, 333]],
+            np.array([[153, 444],
+                      [183, 445],
+                      [185, 416],
+                      [160, 415]],
                      np.int32),
             (0, 0, 255),
             1980.23, 2149.55
         )
         self.lane2_1 = Lane(
-            np.array([[230, 379],
-                      [254, 380],
-                      [259, 347],
-                      [235, 346]],
+            np.array([[228, 442],
+                      [256, 443],
+                      [258, 416],
+                      [225, 416]],
                      np.int32),
             (0, 0, 255),
             1979.07, 2153.05
         )
         self.lane3_1 = Lane(
-            np.array([[308, 391],
-                      [333, 395],
-                      [334, 355],
-                      [312, 355]],
+            np.array([[303, 451],
+                      [333, 452],
+                      [333, 412],
+                      [299, 407]],
                      np.int32),
             (0, 0, 255),
             1978.11, 2156.23
         )
         self.lane1_2 = Lane(
-            np.array([[190, 224],
-                      [210, 224],
-                      [214, 201],
-                      [191, 196]],
+            np.array([[184, 303],
+                      [200, 303],
+                      [207, 280],
+                      [189, 277]],
                      np.int32),
             (0, 0, 255),
             1971.67, 2147.28
         )
         self.lane2_2 = Lane(
-            np.array([[247, 224],
-                      [266, 226],
-                      [267, 204],
-                      [248, 201]],
+            np.array([[244, 302],
+                      [265, 303],
+                      [267, 274],
+                      [248, 274]],
                      np.int32),
             (0, 0, 255),
             1969.87, 2150.57
         )
         self.lane3_2 = Lane(
-            np.array([[307, 221],
-                      [328, 219],
-                      [328, 202],
-                      [311, 200]],
+            np.array([[306, 291],
+                      [323, 289],
+                      [323, 264],
+                      [307, 264]],
                      np.int32),
             (0, 0, 255),
             1969.12, 2153.64
@@ -293,15 +295,22 @@ class SumoEnvironment(gym.Env):
         self.rewards = {ts: None for ts in self.ts_ids}
 
         self.model = YOLO("yolov8m.pt")
-        # self.cap = cv2.VideoCapture(
-        #     "/home/faidz-arante/Videos/2024-04-03_13-55-00.mkv")
-        self.cap = cv2.VideoCapture(
-            "/home/faidz-arante/Videos/real_car_test.mp4")
+
+        if self.use_cam:
+            self.cap = cv2.VideoCapture(2)
+        else:
+            self.cap = cv2.VideoCapture(
+                "/home/faidz-arante/Videos/real_car_test.mp4")
+            # self.cap = cv2.VideoCapture(
+            #     "/home/faidz-arante/Videos/2024-04-03_13-55-00.mkv")
 
     def object_detection_step(self):
         if not self.cap.isOpened():
-            # self.cap.open("/home/faidz-arante/Videos/2024-04-03_13-55-00.mkv")
-            self.cap.open("/home/faidz-arante/Videos/real_car_test.mp4")
+            if self.use_cam:
+                self.cap.open(2)
+            else:
+                self.cap.open("/home/faidz-arante/Videos/real_car_test.mp4")
+                # self.cap.open("/home/faidz-arante/Videos/2024-04-03_13-55-00.mkv")
 
         self.success, self.frame = self.cap.read()
 

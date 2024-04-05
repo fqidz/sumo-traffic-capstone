@@ -69,7 +69,7 @@ def get_average_speed(veh_list) -> float:
 metrics = []
 
 sumo_cmd = ['sumo-gui', '-c',
-            './sumo-things/actuated/main.sumocfg', '--time-to-teleport', '-1']
+            './sumo-things/actuated/main.sumocfg', '--time-to-teleport', '2000']
 traci.start(sumo_cmd)
 
 lanes = list(
@@ -94,22 +94,23 @@ lanes_dir: list[list[str]] = [
 
 for _ in range(num_seconds):
     traci.simulationStep()
-    traci.trafficlight.setRedYellowGreenState('0', "rrrrrrrrrrrrrrrrrrrrrrrr")
+    # traci.trafficlight.setRedYellowGreenState('0', "rrrrrrrrrrrrrrrrrrrrrrrr")
     vehs = traci.vehicle.getIDList()
     info = {"step": traci.simulation.getTime()}
     all_info = _get_per_agent_info(vehs, lanes)
     info.update(all_info)
-    metrics.append(info.copy())
+    if traci.simulation.getTime() % 10 == 0:
+        metrics.append(info.copy())
 
-    veh_count_per_lane = []
-    for direction in lanes_dir:
-        lane_dir_count = [
-            traci.lane.getLastStepVehicleNumber(x) for x in direction]
-        veh_count_per_lane.append(np.sum(lane_dir_count))
-    print(veh_count_per_lane)
-    veh_count_per_lane = np.divide(veh_count_per_lane, [60, 66, 42, 82])
-    print(veh_count_per_lane)
+    # veh_count_per_lane = []
+    # for direction in lanes_dir:
+    #     lane_dir_count = [
+    #         traci.lane.getLastStepVehicleNumber(x) for x in direction]
+    #     veh_count_per_lane.append(np.sum(lane_dir_count))
+    # print(veh_count_per_lane)
+    # veh_count_per_lane = np.divide(veh_count_per_lane, [60, 66, 42, 82])
+    # print(veh_count_per_lane)
 
 traci.close()
 
-save_csv(out_csv_name='./output/actuated/traffic-stats/actuated_', metrics=metrics)
+save_csv(out_csv_name='./output/actuated/traffic-stats/actuated3_', metrics=metrics)

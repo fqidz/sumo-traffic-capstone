@@ -8,6 +8,10 @@ model_name_path = input('Model Name: ')
 use_gui = ask_user("Use GUI? (y/N) ")
 use_object_detection = ask_user("Object detection mode? (y/N) ")
 load_model = ask_user("Load model? (y/N) ")
+if use_object_detection:
+    use_cam = ask_user("Use Cam? (y/N) ")
+else:
+    use_cam = False
 
 model_name = model_name_path + '.zip'
 
@@ -69,7 +73,8 @@ env = SumoEnvironment(net_file='./sumo-things/net.net.xml',
                       single_agent=True,
                       num_seconds=num_seconds,
                       observation_class=MyObservationFunction,
-                      object_detection=object_detection
+                      object_detection=object_detection,
+                      use_cam=use_cam,
                       )
 
 
