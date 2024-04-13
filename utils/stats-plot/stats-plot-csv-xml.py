@@ -1,6 +1,7 @@
 from os.path import isfile, join
 import os
 from pathlib import Path
+from matplotlib.ticker import FormatStrFormatter
 import numpy as np
 import matplotlib.pyplot as plt
 import numpy as np
@@ -152,19 +153,40 @@ class DataProcessing():
         for data in dicts:
             data_list.append(list(data.values()))
 
-        fig, axs = plt.subplots(2)
-        _ = fig
-        axs[0].plot(data_list[0])
-        axs[1].plot(data_list[1], color='r')
-        axs[0].set_title('Queue Length (No. of Vehicles)')
-        axs[1].set_title('Mean Speeds (m/s)')
-        axs[0].set_yticks(np.arange(0, 300000, 50000))
-        axs[1].set_yticks(np.arange(2.5, 9.0, 0.5))
-        axs[1].set_xlabel("Episodes")
-        for ax in axs:
-            ax.grid(visible=True)
+        plt.plot(data_list[0], color="#56AE57")
+        plt.title('Total queue length')
+        plt.yticks(np.arange(25000, 260000, 25000))
+        plt.xlabel('episodes')
+        plt.ylabel('vehicles')
+        plt.grid(True)
 
         plt.show()
+
+        plt.plot(data_list[1], color="#ff964f")
+        plt.title('Mean speed of vehicles')
+        plt.yticks(np.arange(2.5, 9.0, 0.5))
+        plt.xlabel('episodes')
+        plt.ylabel('m/s')
+        plt.grid(True)
+
+        plt.show()
+
+        # _, axs = plt.subplots(2)
+        # axs[0].plot(data_list[0])
+        # axs[1].plot(data_list[1], color='r')
+        # axs[0].set_title('Queue Length')
+        # axs[1].set_title('Vehicle Mean Speeds')
+        # axs[0].set_yticks(np.arange(0, 300000, 50000))
+        # axs[1].set_yticks(np.arange(2.5, 9.0, 0.5))
+        # axs[0].set_xlabel("episodes")
+        # axs[1].set_xlabel("episodes")
+        # axs[0].set_ylabel("vehicles")
+        # axs[1].set_ylabel("m/s")
+
+        # for ax in axs:
+        #     ax.grid(visible=True)
+
+        # plt.show()
 
     def run(self):
         self.prompt_save()
