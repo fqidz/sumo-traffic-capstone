@@ -113,7 +113,6 @@ class SumoEnvironment(gym.Env):
         net_file: str,
         route_file: str,
         routes: Iterable[str],
-        vehicle_types: Iterable[str],
         out_csv_name: Optional[str] = None,
         use_gui: bool = False,
         virtual_display: Tuple[int, int] = (3200, 1800),
@@ -149,7 +148,6 @@ class SumoEnvironment(gym.Env):
         self._net = net_file
         self._route = route_file
         self.routes = routes
-        self.vehicle_types = vehicle_types
         self.use_gui = use_gui
         if self.use_gui or self.render_mode is not None:
             self._sumo_binary = sumolib.checkBinary("sumo-gui")
@@ -294,7 +292,8 @@ class SumoEnvironment(gym.Env):
         self.observations = {ts: None for ts in self.ts_ids}
         self.rewards = {ts: None for ts in self.ts_ids}
 
-        self.model = YOLO("yolov8m.pt")
+        if self.object_detection:
+            self.model = YOLO("yolov8m.pt")
 
         if self.use_cam:
             self.cap = cv2.VideoCapture(2)
