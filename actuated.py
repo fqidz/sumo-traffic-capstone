@@ -94,12 +94,12 @@ lanes_dir: list[list[str]] = [
 
 for _ in range(num_seconds):
     traci.simulationStep()
-    # traci.trafficlight.setRedYellowGreenState('0', "rrrrrrrrrrrrrrrrrrrrrrrr")
-    vehs = traci.vehicle.getIDList()
-    info = {"step": traci.simulation.getTime()}
-    all_info = _get_per_agent_info(vehs, lanes)
-    info.update(all_info)
+    # only save data every 10 steps
     if traci.simulation.getTime() % 10 == 0:
+        vehs = traci.vehicle.getIDList()
+        info = {"step": traci.simulation.getTime()}
+        all_info = _get_per_agent_info(vehs, lanes)
+        info.update(all_info)
         metrics.append(info.copy())
 
     # veh_count_per_lane = []
