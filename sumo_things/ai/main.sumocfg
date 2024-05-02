@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2024-03-29 20:58:47 by Eclipse SUMO sumo Version v1_19_0+1552-1b122d1d49e
+<!-- generated on 2024-05-02 13:17:25 by Eclipse SUMO sumo Version v1_19_0+1953-d1f119dd4db
 -->
 
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
@@ -8,6 +8,7 @@
     <input>
         <net-file value="net.net.xml"/>
         <route-files value="main.rou.xml"/>
+        <additional-files value="loops.add.xml"/>
     </input>
 
 </configuration>

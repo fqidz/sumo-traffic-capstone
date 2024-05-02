@@ -41,23 +41,3 @@ def my_reward_fn(traffic_signal):
     # print(f'reward: {speed + queue}')
 
     return speed + queue
-
-
-def ask_user(prompt: str) -> bool:
-    repeat = True
-    answer = False
-
-    prompt_answer = input(prompt).lower()
-    prompt_answer = "".join(prompt_answer.split())
-
-    while repeat:
-        if prompt_answer == "y":
-            answer = True
-            repeat = False
-        elif prompt_answer == "n" or not prompt_answer:
-            answer = False
-            repeat = False
-        else:
-            repeat = True
-
-    return answer
